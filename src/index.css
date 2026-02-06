@@ -1,2 +1,6 @@
 @import 'tailwindcss';
 @import '@a1rth/css-normalize';
+
+body {
+	background-color: #01122e;
+}
