@@ -8,3 +8,8 @@ body {
 .backgroundEffect {
 	filter: blur(4px);
 }
+
+.languageSelect img {
+	height: 30px;
+	width: 100%;	
+}

@@ -57,12 +57,16 @@ export default function Main() {
 				{/* <Snowfall snowflakeCount={40} /> */}
 			</div>
 
-			<header className='z-1'>
-				<div className='logo'>
-					<img src='/images/logo.svg' alt='' />
+			<header className='relative w-full h-30 flex justify-end items-start flex-wrap px-6 mt-5'>
+
+				<div className='logo absolute left-1/2 -translate-x-1/2 w-60'>
+					<img className='w-full h-full' src='/images/logo.svg' alt='' />
 				</div>
-				<div className='languageSelect'>
+
+				<div className='languageSelect flex items-center'>
+					<img src='/images/icons/ukraine.svg' alt='' />
 					<MaterialUISwitch sx={{ m: 1 }} defaultChecked />
+					<img src='/images/icons/unitedKingdom.svg' alt='' />
 				</div>
 			</header>
 
