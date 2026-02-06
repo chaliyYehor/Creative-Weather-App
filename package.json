@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@a1rth/css-normalize": "^1.2.4",
     "@gsap/react": "^2.1.2",
     "@tailwindcss/vite": "^4.1.18",
     "@uidotdev/usehooks": "^2.4.1",
