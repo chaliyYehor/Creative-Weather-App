@@ -57,9 +57,9 @@ export default function Main() {
 				{/* <Snowfall snowflakeCount={40} /> */}
 			</div>
 
-			<header className='relative w-full h-30 flex justify-end items-start flex-wrap px-6 mt-5'>
+			<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end px-6 mt-5'>
 
-				<div className='logo absolute left-1/2 -translate-x-1/2 w-60'>
+				<div className='logo md:absolute md:left-1/2 md:-translate-x-1/2 w-40 lg:w-60'>
 					<img className='w-full h-full' src='/images/logo.svg' alt='' />
 				</div>
 
