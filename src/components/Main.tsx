@@ -1,6 +1,7 @@
 import Snowfall from 'react-snowfall'
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
+import Search from './Search'
 
 const size = 1.3
 
@@ -71,7 +72,7 @@ export default function Main() {
 			</header>
 
 			<div className='chooseCity z-1 w-full h-full'>
-				
+				<Search />
 			</div>
 		</section>
 	)
