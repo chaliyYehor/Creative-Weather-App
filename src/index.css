@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @import '@a1rth/css-normalize';
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	background-color: #01122e;
 }
@@ -11,5 +15,5 @@ body {
 
 .languageSelect img {
 	height: 30px;
-	width: 100%;	
+	width: 100%;
 }
