@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@a1rth/css-normalize": "^1.2.4",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@gsap/react": "^2.1.2",
+    "@mui/material": "^7.3.7",
     "@tailwindcss/vite": "^4.1.18",
     "@uidotdev/usehooks": "^2.4.1",
     "gsap": "^3.14.2",
