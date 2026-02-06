@@ -4,3 +4,7 @@
 body {
 	background-color: #01122e;
 }
+
+.backgroundEffect {
+	filter: blur(4px);
+}
