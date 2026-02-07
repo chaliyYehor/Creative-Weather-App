@@ -59,7 +59,6 @@ export default function Main() {
 			</div>
 
 			<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5'>
-
 				<div className='logo md:absolute md:left-1/2 md:-translate-x-1/2 w-40 lg:w-60'>
 					<img className='w-full h-full' src='/images/logo.svg' alt='' />
 				</div>
@@ -71,7 +70,7 @@ export default function Main() {
 				</div>
 			</header>
 
-			<div className='chooseCity z-1 w-full h-full'>
+			<div className='chooseCity z-1 w-full h-full flex flex-col justify-center items-center'>
 				<Search />
 			</div>
 		</section>
