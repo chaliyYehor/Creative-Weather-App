@@ -1,5 +1,9 @@
+import { useForm } from 'react-hook-form'
+
+
+
 export default function Search() {
-	return (
-		<></>
-	)
+	const {register, handleSubmit, formState: {isSubmitting}} = useForm()
+
+	return <></>
 }
