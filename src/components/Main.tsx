@@ -2,6 +2,7 @@ import Snowfall from 'react-snowfall'
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import Search from './Search'
+import Loader from './Loader'
 
 const size = 1.3
 
@@ -53,26 +54,28 @@ const MaterialUISwitch = styled(Switch)(() => ({
 
 export default function Main() {
 	return (
-		<section className='mainSection w-screen h-screen overflow-hidden bg-[#01122e]'>
-			<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
-				{/* <Snowfall snowflakeCount={40} /> */}
-			</div>
-
-			<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5'>
-				<div className='logo md:absolute md:left-1/2 md:-translate-x-1/2 w-40 lg:w-60'>
-					<img className='w-full h-full' src='/images/logo.svg' alt='' />
+		<>
+			<section className='mainSection w-screen h-screen overflow-hidden bg-[#01122e]'>
+				<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
+					{/* <Snowfall snowflakeCount={40} /> */}
 				</div>
 
-				<div className='languageSelect flex items-center md:px-6'>
-					<img src='/images/icons/ukraine.svg' alt='' />
-					<MaterialUISwitch sx={{ m: 1 }} defaultChecked />
-					<img src='/images/icons/unitedKingdom.svg' alt='' />
-				</div>
-			</header>
+				<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5'>
+					<div className='logo md:absolute md:left-1/2 md:-translate-x-1/2 w-40 lg:w-60'>
+						<img className='w-full h-full' src='/images/logo.svg' alt='' />
+					</div>
 
-			<div className='chooseCity w-screen h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
-				<Search />
-			</div>
-		</section>
+					<div className='languageSelect flex items-center md:px-6'>
+						<img src='/images/icons/ukraine.svg' alt='' />
+						<MaterialUISwitch sx={{ m: 1 }} defaultChecked />
+						<img src='/images/icons/unitedKingdom.svg' alt='' />
+					</div>
+				</header>
+
+				<div className='chooseCity w-screen h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
+					<Search />
+				</div>
+			</section>
+		</>
 	)
 }

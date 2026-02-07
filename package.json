@@ -19,6 +19,8 @@
     "@mui/material": "^7.3.7",
     "@tailwindcss/vite": "^4.1.18",
     "@uidotdev/usehooks": "^2.4.1",
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
     "gsap": "^3.14.2",
     "lucide-react": "^0.563.0",
     "react": "^19.2.0",
