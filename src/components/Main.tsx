@@ -54,7 +54,7 @@ const MaterialUISwitch = styled(Switch)(() => ({
 export default function Main() {
 	return (
 		<section className='mainSection w-screen h-screen overflow-hidden bg-[#01122e]'>
-			<div className='backgroundEffect w-full h-full fixed'>
+			<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
 				{/* <Snowfall snowflakeCount={40} /> */}
 			</div>
 
@@ -70,7 +70,7 @@ export default function Main() {
 				</div>
 			</header>
 
-			<div className='chooseCity z-1 w-full h-full flex flex-col justify-center items-center'>
+			<div className='chooseCity w-screen h-full flex flex-col justify-center items-center'>
 				<Search />
 			</div>
 		</section>
