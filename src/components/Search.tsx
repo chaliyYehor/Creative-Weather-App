@@ -1,10 +1,34 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Autocomplete from '@mui/material/Autocomplete'
+import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 
+const size = 1.3
 
+const StyledAutocomplete = styled(Autocomplete)(() => ({
+	width: 320 * size,
+
+	/* input wrapper */
+	'& .MuiInputBase-root': {
+		backgroundColor: '#fff',
+		borderRadius: 20,
+		paddingLeft: 14 * size,
+	},
+
+	/* сам input */
+	'& .MuiInputBase-input': {
+		color: '#001e3c',
+		fontSize: 14 * size,
+		padding: `${10 * size}px 8 * size}px`,
+	},
+
+	/* placeholder / label */
+	'& label': {
+		color: 'black',
+	},
+}))
 
 const searchSchema = z.object({
 	search: z.string().min(2),
@@ -14,7 +38,6 @@ type Search = z.infer<typeof searchSchema>
 
 export default function Search() {
 	const {
-		register,
 		control,
 		handleSubmit,
 		formState: { isSubmitting },
@@ -38,22 +61,15 @@ export default function Search() {
 					control={control}
 					defaultValue=''
 					render={({ field }) => (
-						<Autocomplete
+						<StyledAutocomplete
 							freeSolo
-							options={[]}
+							options={['black', 'green', 'orange']}
 							value={field.value}
 							loading={isSubmitting}
 							onChange={(_, value) => field.onChange(value)}
 							onInputChange={(_, value) => field.onChange(value)}
-							sx={{
-								width: 320,
-								'& .MuiInputBase-root': {
-									backgroundColor: 'white',
-									borderRadius: 2,
-								},
-							}}
 							renderInput={params => (
-								<TextField {...params} label='Weather in...' />
+								<TextField {...params} placeholder='Weather in...' />
 							)}
 						/>
 					)}
