@@ -32,6 +32,16 @@ const StyledAutocomplete = styled(Autocomplete)(() => ({
 	},
 }))
 
+const StyledSubmitButton = styled(Button)(() => ({
+	/* disabled — переопределяем MUI */
+	'&.Mui-disabled': {
+		backgroundColor: '#1976d2', // тот же цвет
+		color: '#fff',
+		opacity: 1, // убираем затемнение
+		cursor: 'not-allowed', // можно оставить для UX
+	},
+}))
+
 const searchSchema = z.object({
 	search: z.string().min(2),
 })
@@ -46,9 +56,9 @@ export default function Search() {
 	} = useForm<Search>({ resolver: zodResolver(searchSchema) })
 
 	const onSubmit: SubmitHandler<Search> = async data => {
-		await new Promise(res =>
+		await new Promise<void>(res =>
 			setTimeout(() => {
-				res
+				res()
 			}, 1000),
 		)
 
@@ -57,7 +67,10 @@ export default function Search() {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form
+				className='flex justify-center items-center gap-5'
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<Controller
 					name='search'
 					control={control}
@@ -65,10 +78,9 @@ export default function Search() {
 					render={({ field }) => (
 						<StyledAutocomplete
 							freeSolo
-							options={['black', 'green', 'orange']}
+							options={[]}
 							value={field.value}
-							loading={isSubmitting}
-							onChange={(_, value) => field.onChange(value)}
+							onChange={(_, value) => field.onChange(value ?? '')}
 							onInputChange={(_, value) => field.onChange(value)}
 							renderInput={params => (
 								<TextField {...params} placeholder='Weather in...' />
@@ -77,14 +89,15 @@ export default function Search() {
 					)}
 				/>
 				<div className='search'>
-					<Button
-						sx={{ height: '50px', fontSize: '1.1rem' }}
+					<StyledSubmitButton
+						disabled={isSubmitting}
+						sx={{ height: '50px', fontSize: '1.1rem', borderRadius: '25px' }}
 						variant='contained'
 						startIcon={<SearchIcon />}
 						type='submit'
 					>
 						Search
-					</Button>
+					</StyledSubmitButton>
 				</div>
 			</form>
 		</>
