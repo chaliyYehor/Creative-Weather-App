@@ -6,31 +6,32 @@ import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
-const size = 1.3
+const StyledAutocomplete = styled(Autocomplete)<{ scale: number }>(
+	({ scale }) => ({
+		width: 320 * scale,
 
-const StyledAutocomplete = styled(Autocomplete)(() => ({
-	width: 320 * size,
+		/* input wrapper */
+		'& .MuiInputBase-root': {
+			backgroundColor: '#fff',
+			borderRadius: 5,
+			paddingLeft: 14 * scale,
+		},
 
-	/* input wrapper */
-	'& .MuiInputBase-root': {
-		backgroundColor: '#fff',
-		borderRadius: 5,
-		paddingLeft: 14 * size,
-	},
+		/* сам input */
+		'& .MuiInputBase-input': {
+			color: '#001e3c',
+			fontSize: 14 * scale,
+			padding: `${10 * scale}px 8 * size}px`,
+		},
 
-	/* сам input */
-	'& .MuiInputBase-input': {
-		color: '#001e3c',
-		fontSize: 14 * size,
-		padding: `${10 * size}px 8 * size}px`,
-	},
-
-	/* placeholder / label */
-	'& label': {
-		color: 'black',
-	},
-}))
+		/* placeholder / label */
+		'& label': {
+			color: 'black',
+		},
+	}),
+)
 
 const StyledSubmitButton = styled(Button)(() => ({
 	/* disabled — переопределяем MUI */
@@ -49,6 +50,15 @@ const searchSchema = z.object({
 type Search = z.infer<typeof searchSchema>
 
 export default function Search() {
+	const isExtraSm = useMediaQuery('(max-width:355px)')
+	const isSmall = useMediaQuery('(max-width:600px)')
+	const isLarge = useMediaQuery('(min-width:1025px)')
+
+	let scale = 1.3
+
+	if (isExtraSm) scale = 0.8
+	else if (isSmall) scale = 1
+
 	const {
 		control,
 		handleSubmit,
@@ -68,7 +78,9 @@ export default function Search() {
 	return (
 		<>
 			<form
-				className='flex justify-center items-center gap-5'
+				className={
+					'flex flex-col sm:flex-row justify-center items-center gap-5'
+				}
 				onSubmit={handleSubmit(onSubmit)}
 			>
 				<Controller
@@ -77,6 +89,7 @@ export default function Search() {
 					defaultValue=''
 					render={({ field }) => (
 						<StyledAutocomplete
+							scale={scale}
 							freeSolo
 							options={[]}
 							value={field.value}
@@ -93,10 +106,10 @@ export default function Search() {
 						disabled={isSubmitting}
 						sx={{ height: '50px', fontSize: '1.1rem', borderRadius: '25px' }}
 						variant='contained'
-						startIcon={<SearchIcon />}
+						startIcon={isLarge || isSmall ? <SearchIcon /> : ''}
 						type='submit'
 					>
-						Search
+						{isLarge || isSmall ? 'Search' : <SearchIcon />}
 					</StyledSubmitButton>
 				</div>
 			</form>

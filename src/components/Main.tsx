@@ -70,7 +70,7 @@ export default function Main() {
 				</div>
 			</header>
 
-			<div className='chooseCity w-screen h-full flex flex-col justify-center items-center'>
+			<div className='chooseCity w-screen h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
 				<Search />
 			</div>
 		</section>
