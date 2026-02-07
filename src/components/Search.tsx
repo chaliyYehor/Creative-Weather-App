@@ -4,6 +4,8 @@ import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
+import { Search as SearchIcon } from 'lucide-react'
+import Button from '@mui/material/Button'
 
 const size = 1.3
 
@@ -13,7 +15,7 @@ const StyledAutocomplete = styled(Autocomplete)(() => ({
 	/* input wrapper */
 	'& .MuiInputBase-root': {
 		backgroundColor: '#fff',
-		borderRadius: 20,
+		borderRadius: 5,
 		paddingLeft: 14 * size,
 	},
 
@@ -74,6 +76,16 @@ export default function Search() {
 						/>
 					)}
 				/>
+				<div className='search'>
+					<Button
+						sx={{ height: '50px', fontSize: '1.1rem' }}
+						variant='contained'
+						startIcon={<SearchIcon />}
+						type='submit'
+					>
+						Search
+					</Button>
+				</div>
 			</form>
 		</>
 	)
