@@ -1,4 +1,4 @@
-import Snowfall from 'react-snowfall'
+// import Snowfall from 'react-snowfall'
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import Search from '#components/Search'
