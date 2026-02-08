@@ -2,6 +2,7 @@
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import Search from '#components/Search'
+import Loader from '#components/Loader'
 
 const size = 1.3
 
@@ -54,6 +55,7 @@ const MaterialUISwitch = styled(Switch)(() => ({
 export default function Main() {
 	return (
 		<>
+			<Loader />
 			<section className='mainSection w-screen h-screen overflow-hidden bg-[#01122e]'>
 				<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
 					{/* <Snowfall snowflakeCount={40} /> */}
