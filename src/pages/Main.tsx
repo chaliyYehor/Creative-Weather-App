@@ -4,6 +4,8 @@ import Switch from '@mui/material/Switch'
 import Search from '#components/Search'
 import Loader from '#components/Loader'
 import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 
 const size = 1.3
 
@@ -55,6 +57,20 @@ const MaterialUISwitch = styled(Switch)(() => ({
 
 export default function Main() {
 	const loaderRef = useRef<HTMLDivElement>(null)
+
+	
+	useGSAP(() => {
+		const tl = gsap.timeline()
+
+		tl.to(loaderRef.current!.children[0], {
+			autoAlpha: 0,
+			duration: 1,
+			delay: 2
+		}).to(loaderRef.current, {
+			autoAlpha: 0,
+			duration: 1,
+		}, '<0.5')
+	})
 
 	return (
 		<>
