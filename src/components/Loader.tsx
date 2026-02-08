@@ -1,7 +1,8 @@
 import dayjs from 'dayjs'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 
-export default function Loader() {
+const Loader = forwardRef<HTMLDivElement>((_, ref) => {
 	function getDayOrNight() {
 		const hour = dayjs().hour()
 
@@ -13,7 +14,10 @@ export default function Loader() {
 	}
 
 	return (
-		<div className='loader-wrapper bg-[#01122e] w-screen h-screen z-10 fixed left-0 top-0 flex justify-center items-center'>
+		<div
+			ref={ref}
+			className='loader-wrapper bg-[#01122e] w-screen h-screen z-10 fixed left-0 top-0 flex justify-center items-center'
+		>
 			<div
 				className={clsx({
 					'loader-day': getDayOrNight() === 'day',
@@ -22,4 +26,6 @@ export default function Loader() {
 			></div>
 		</div>
 	)
-}
+})
+
+export default Loader
