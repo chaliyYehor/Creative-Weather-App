@@ -97,7 +97,7 @@ export default function Main() {
 			<Loader ref={loaderRef} />
 			<section className='mainSection w-screen h-screen overflow-hidden bg-[#01122e]'>
 				<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
-					{/* <Snowfall snowflakeCount={40} /> */}
+					{/* <Snowfall snowflakeCount={60} /> */}
 				</div>
 
 				<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5'>
