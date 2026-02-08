@@ -14,6 +14,10 @@ export default defineConfig({
 				dirname(fileURLToPath(import.meta.url)),
 				'src/components',
 			),
+			'#pages': resolve(
+				dirname(fileURLToPath(import.meta.url)),
+				'src/pages'
+			)
 		},
 	},
 })

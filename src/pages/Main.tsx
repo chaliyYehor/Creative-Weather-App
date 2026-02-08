@@ -1,8 +1,7 @@
 import Snowfall from 'react-snowfall'
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
-import Search from './Search'
-import Loader from './Loader'
+import Search from '#components/Search'
 
 const size = 1.3
 
