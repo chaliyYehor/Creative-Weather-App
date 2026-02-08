@@ -16,7 +16,7 @@ const Loader = forwardRef<HTMLDivElement>((_, ref) => {
 	return (
 		<div
 			ref={ref}
-			className='loader-wrapper bg-[#01122e] w-screen h-screen z-10 fixed left-0 top-0 flex justify-center items-center'
+			className='loader-wrapper bg-[#01122e] fixed inset-0 z-10 flex justify-center items-center'
 		>
 			<div
 				className={clsx({

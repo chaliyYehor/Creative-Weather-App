@@ -6,6 +6,7 @@ import Loader from '#components/Loader'
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import FadeOut from '#components/FadeOut'
 
 const size = 1.3
 
@@ -63,8 +64,8 @@ export default function Main() {
 
 		tl.to(loaderRef.current!.children[0], {
 			autoAlpha: 0,
-			duration: 1,
-			delay: 2,
+			duration: 0.1,
+			delay: 0,
 		})
 			.to(
 				loaderRef.current,
@@ -95,24 +96,25 @@ export default function Main() {
 	return (
 		<>
 			<Loader ref={loaderRef} />
-			<section className='mainSection w-screen h-screen overflow-hidden bg-[#01122e]'>
+			<FadeOut />
+			<section className='mainSection w-full h-screen overflow-hidden bg-[#01122e]'>
 				<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
 					{/* <Snowfall snowflakeCount={60} /> */}
 				</div>
 
-				<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5'>
+				<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5 md:mt-10'>
 					<div className='logo md:absolute md:left-1/2 md:-translate-x-1/2 w-40 lg:w-60'>
-						<img className='w-full h-full' src='/images/logo.svg' alt='' />
+						<img className='w-full h-full' src='/images/logo.svg' alt='logo' />
 					</div>
 
 					<div className='languageSelect flex items-center md:px-6'>
-						<img src='/images/icons/ukraine.svg' alt='' />
+						<img src='/images/icons/ukraine.svg' alt='Ukraine icon' />
 						<MaterialUISwitch sx={{ m: 1 }} defaultChecked />
-						<img src='/images/icons/unitedKingdom.svg' alt='' />
+						<img src='/images/icons/unitedKingdom.svg' alt='UK icon' />
 					</div>
 				</header>
 
-				<div className='chooseCity w-screen h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
+				<div className='chooseCity w-full h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
 					<Search />
 				</div>
 			</section>
