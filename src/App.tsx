@@ -1,5 +1,5 @@
 import Loader from '#components/Loader'
-import ErrorPage from '#pages/errorPage'
+import ErrorPage from '#pages/ErrorPage'
 import Main from '#pages/Main'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'

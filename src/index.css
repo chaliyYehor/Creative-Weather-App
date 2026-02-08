@@ -71,3 +71,14 @@ body {
 		filter: drop-shadow(0px 0px 20px #8d847f);
 	}
 }
+
+.errorWrapper h1 {
+	font-family: 'SN Pro', sans-serif;
+	font-weight: bold;
+}
+
+.errorWrapper p {
+	font-family:
+		'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
