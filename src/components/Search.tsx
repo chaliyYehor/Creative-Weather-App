@@ -7,6 +7,7 @@ import z from 'zod'
 import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import gsap from 'gsap'
 
 const StyledAutocomplete = styled(Autocomplete)<{ scale: number }>(
 	({ scale }) => ({
@@ -66,6 +67,14 @@ export default function Search() {
 	} = useForm<Search>({ resolver: zodResolver(searchSchema) })
 
 	const onSubmit: SubmitHandler<Search> = async data => {
+		gsap.to('.slicesWrapper div', {
+			x: 0,
+			duration: 1,
+			stagger: 0.1,
+			delay: 0.3,
+			ease: 'power1.inOut',
+		})
+		
 		await new Promise<void>(res =>
 			setTimeout(() => {
 				res()
