@@ -1,4 +1,3 @@
-// import Loader from '#components/Loader'
 import ErrorPage from '#pages/ErrorPage'
 import Main from '#pages/Main'
 
@@ -16,7 +15,6 @@ export default function App() {
 	return (
 		<>
 			<RouterProvider router={router} />
-			{/* <Loader /> */}
 		</>
 	)
 }
