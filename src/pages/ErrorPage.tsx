@@ -16,7 +16,7 @@ export default function ErrorPage() {
 
 	return (
 		<>
-			<div className='errorWrapper w-full h-screen flex flex-col justify-center items-center gap-10 text-center px-5'>
+			<div className='errorWrapper w-full h-full flex flex-col justify-center items-center gap-10 text-center px-5'>
 				<p className='anim text-gray-400 sm:text-2xl text-md'>404 Not Found</p>
 				<h1 className='anim shakeAnim text-gray-100 sm:text-7xl text-4xl'>
 					Oops! Page Not Found

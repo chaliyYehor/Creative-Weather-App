@@ -97,7 +97,7 @@ export default function Main() {
 		<>
 			<Loader ref={loaderRef} />
 			<FadeOut />
-			<section className='mainSection w-full h-screen overflow-hidden bg-[#01122e]'>
+			<section className='mainSection w-full h-full overflow-hidden bg-[#01122e]'>
 				<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
 					{/* <Snowfall snowflakeCount={60} /> */}
 				</div>
