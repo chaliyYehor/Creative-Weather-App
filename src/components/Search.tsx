@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Autocomplete from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
+import { useDebounce } from '@uidotdev/usehooks'
 import TextField from '@mui/material/TextField'
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
@@ -8,6 +9,11 @@ import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import gsap from 'gsap'
+import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import autocompleteQueryOptions from '#queryOptions/autocompleteQueryOptions'
+import { Box } from '@mui/material'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 const StyledAutocomplete = styled(Autocomplete)<{ scale: number }>(
 	({ scale }) => ({
@@ -51,6 +57,13 @@ const searchSchema = z.object({
 type Search = z.infer<typeof searchSchema>
 
 export default function Search() {
+	const [value, setValue] = useState('')
+	const debouncedSearchTerm = useDebounce(value, 300)
+
+	const { data, isFetching } = useQuery(
+		autocompleteQueryOptions(debouncedSearchTerm),
+	)
+
 	const isExtraSm = useMediaQuery('(max-width:355px)')
 	const isSmall = useMediaQuery('(max-width:600px)')
 	const isLarge = useMediaQuery('(min-width:1025px)')
@@ -67,21 +80,15 @@ export default function Search() {
 	} = useForm<Search>({ resolver: zodResolver(searchSchema) })
 
 	const onSubmit: SubmitHandler<Search> = async data => {
-		gsap.to('.slicesWrapper div', {
-			x: 0,
-			duration: 1,
-			stagger: 0.1,
-			delay: 0.3,
-			ease: 'power1.inOut',
-		})
-		
-		await new Promise<void>(res =>
-			setTimeout(() => {
-				res()
-			}, 1000),
-		)
+		// gsap.to('.slicesWrapper div', {
+		// 	x: 0,
+		// 	duration: 1,
+		// 	stagger: 0.1,
+		// 	delay: 0.3,
+		// 	ease: 'power1.inOut',
+		// })
 
-		console.log(data.search)
+		console.log(data)
 	}
 
 	return (
@@ -100,10 +107,36 @@ export default function Search() {
 						<StyledAutocomplete
 							scale={scale}
 							freeSolo
-							options={[]}
+							loading={isFetching}
+							options={data?.results.map(suggestion => suggestion?.city) || []}
 							value={field.value}
-							onChange={(_, value) => field.onChange(value ?? '')}
-							onInputChange={(_, value) => field.onChange(value)}
+							onChange={(_, value) => {
+								field.onChange(value ?? '')
+								setValue(value as string)
+							}}
+							onInputChange={(_, value) => {
+								field.onChange(value)
+								setValue(value)
+							}}
+							renderOption={(props, option) => {
+								const { key, ...rest } = props
+
+								return (
+									<li key={key} {...rest}>
+										<Box
+											sx={{
+												display: 'flex',
+												alignItems: 'center',
+												justifyContent: 'space-between',
+												width: '100%',
+											}}
+										>
+											<span>{option as string}</span>
+											<LocationOnIcon fontSize='small' sx={{ opacity: 0.6 }} />
+										</Box>
+									</li>
+								)
+							}}
 							renderInput={params => (
 								<TextField {...params} placeholder='Weather in...' />
 							)}
