@@ -112,12 +112,16 @@ export default function Search() {
 							}
 							value={field.value}
 							onChange={(_, value) => {
-								field.onChange(value ?? '')
-								setValue(value as string)
+								const data = value?.split('%')[0]
+
+								field.onChange(data ?? '')
+								setValue(data as string)
 							}}
 							onInputChange={(_, value) => {
-								field.onChange(value)
-								setValue(value)
+								const data = value?.split('%')[0]
+
+								field.onChange(data)
+								setValue(data)
 							}}
 							renderOption={(props, option) => {
 								const { key, ...rest } = props
