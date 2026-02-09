@@ -15,38 +15,34 @@ import autocompleteQueryOptions from '#queryOptions/autocompleteQueryOptions'
 import { Box } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 
-const StyledAutocomplete = styled(Autocomplete)<{ scale: number }>(
-	({ scale }) => ({
-		width: 320 * scale,
+const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
+	scale: number
+}>(({ scale }) => ({
+	width: 320 * scale,
 
-		/* input wrapper */
-		'& .MuiInputBase-root': {
-			backgroundColor: '#fff',
-			borderRadius: 5,
-			paddingLeft: 14 * scale,
-		},
+	'& .MuiInputBase-root': {
+		backgroundColor: '#fff',
+		borderRadius: 5,
+		paddingLeft: 14 * scale,
+	},
 
-		/* сам input */
-		'& .MuiInputBase-input': {
-			color: '#001e3c',
-			fontSize: 14 * scale,
-			padding: `${10 * scale}px 8 * size}px`,
-		},
+	'& .MuiInputBase-input': {
+		color: '#001e3c',
+		fontSize: 14 * scale,
+		padding: `${10 * scale}px 8 * size}px`,
+	},
 
-		/* placeholder / label */
-		'& label': {
-			color: 'black',
-		},
-	}),
-)
+	'& label': {
+		color: 'black',
+	},
+}))
 
 const StyledSubmitButton = styled(Button)(() => ({
-	/* disabled — переопределяем MUI */
 	'&.Mui-disabled': {
-		backgroundColor: '#1976d2', // тот же цвет
+		backgroundColor: '#1976d2',
 		color: '#fff',
-		opacity: 1, // убираем затемнение
-		cursor: 'not-allowed', // можно оставить для UX
+		opacity: 1,
+		cursor: 'not-allowed',
 	},
 }))
 
@@ -108,7 +104,12 @@ export default function Search() {
 							scale={scale}
 							freeSolo
 							loading={isFetching}
-							options={data?.results.map(suggestion => suggestion?.city) || []}
+							options={
+								data?.results.map(
+									suggestion =>
+										`${suggestion?.city}${suggestion?.state === undefined || suggestion?.state === suggestion?.city ? '' : ', ' + suggestion?.state}${', ' + suggestion?.country}%${suggestion?.country_code}`,
+								) || []
+							}
 							value={field.value}
 							onChange={(_, value) => {
 								field.onChange(value ?? '')
@@ -121,6 +122,7 @@ export default function Search() {
 							renderOption={(props, option) => {
 								const { key, ...rest } = props
 
+								const data = option.split('%')
 								return (
 									<li key={key} {...rest}>
 										<Box
@@ -131,7 +133,14 @@ export default function Search() {
 												width: '100%',
 											}}
 										>
-											<span>{option as string}</span>
+											<img
+												loading='lazy'
+												width='20'
+												srcSet={`https://flagcdn.com/w40/${data[1].toLowerCase()}.png 2x`}
+												src={`https://flagcdn.com/w20/${data[1].toLowerCase()}.png`}
+												alt=''
+											/>
+											<span>{data[0]}</span>
 											<LocationOnIcon fontSize='small' sx={{ opacity: 0.6 }} />
 										</Box>
 									</li>
