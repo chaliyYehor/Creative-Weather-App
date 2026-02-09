@@ -28,7 +28,7 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
 
 	'& .MuiInputBase-input': {
 		color: '#001e3c',
-		fontSize: 14 * scale,
+		fontSize: 16 * scale,
 		padding: `${10 * scale}px 8 * size}px`,
 	},
 
