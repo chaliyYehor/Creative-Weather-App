@@ -7,6 +7,9 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import FadeOut from '#components/FadeOut'
+import type { AppDispatch, RootType } from '#store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeLang } from '#store/slices/languageSlice'
 
 const size = 1.3
 
@@ -57,6 +60,10 @@ const MaterialUISwitch = styled(Switch)(() => ({
 }))
 
 export default function Main() {
+	const dispatch = useDispatch<AppDispatch>()
+	const language = useSelector((state: RootType) => state.langSlice.lang)
+	console.log(language)
+
 	const loaderRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
@@ -75,12 +82,16 @@ export default function Main() {
 				},
 				'<0.5',
 			)
-			.from('.logo', {
-				y: -30,
-				opacity: 0,
-				duration: 1.5,
-				ease: 'power1.out',
-			}, '<0.5')
+			.from(
+				'.logo',
+				{
+					y: -30,
+					opacity: 0,
+					duration: 1.5,
+					ease: 'power1.out',
+				},
+				'<0.5',
+			)
 			.from(
 				'.chooseCity',
 				{
@@ -109,7 +120,15 @@ export default function Main() {
 
 					<div className='languageSelect flex items-center md:px-6'>
 						<img src='/images/icons/ukraine.svg' alt='Ukraine icon' />
-						<MaterialUISwitch sx={{ m: 1 }} defaultChecked />
+						<MaterialUISwitch
+							onChange={e =>
+								e.target.checked
+									? dispatch(changeLang('en'))
+									: dispatch(changeLang('uk'))
+							}
+							sx={{ m: 1 }}
+							defaultChecked
+						/>
 						<img src='/images/icons/unitedKingdom.svg' alt='UK icon' />
 					</div>
 				</header>
