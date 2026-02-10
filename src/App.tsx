@@ -11,7 +11,7 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />
 	},
 	{
-		path: '/profiles',
+		path: '/weatherIn/:city',
 		element: <WeatherIn />
 	}
 ])
