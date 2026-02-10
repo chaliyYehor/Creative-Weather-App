@@ -9,6 +9,9 @@ const router = createBrowserRouter([
 		element: <Main />,
 		errorElement: <ErrorPage />
 	},
+	{
+		
+	}
 ])
 
 export default function App() {
