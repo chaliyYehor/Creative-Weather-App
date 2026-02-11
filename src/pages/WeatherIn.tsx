@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import weatherQueryOptions from '#queryOptions/weatherQueryOptions'
 import FadeOut from '#components/FadeOut'
 import { useGSAP } from '@gsap/react'

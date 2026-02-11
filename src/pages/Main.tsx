@@ -127,7 +127,7 @@ export default function Main() {
 									: dispatch(changeLang('uk'))
 							}
 							sx={{ m: 1 }}
-							defaultChecked
+							checked={language === 'en' ? true : false}
 						/>
 						<img src='/images/icons/unitedKingdom.svg' alt='UK icon' />
 					</div>
