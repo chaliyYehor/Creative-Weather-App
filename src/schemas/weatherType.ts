@@ -11,7 +11,8 @@ export interface ForecastResponse {
 		condition: {
 			text: string
 			icon: string
-		}
+		},
+		is_day: '1' | '0'
 	}
 	forecast: {
 		forecastday: ForecastDay[]
