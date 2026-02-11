@@ -19,7 +19,7 @@ async function fetchSuggestions(
 	lang: 'uk' | 'en',
 ): Promise<GeoapifyAutocompleteResponse> {
 	const res = await fetch(
-		`https://api.geoapify.com/v1/geocode/autocomplete?text=${search}&type=city&limit=5&lang=en&format=json&apiKey=${API_KEY}
+		`https://api.geoapify.com/v1/geocode/autocomplete?text=${search}&type=city&limit=5&lang=${lang}&format=json&apiKey=${API_KEY}
 `,
 	)
 
