@@ -24,6 +24,8 @@ export default defineConfig({
 				'src/queryOptions',
 			),
 			'#store': resolve(dirname(fileURLToPath(import.meta.url)), 'src/store'),
+			'#utils': resolve(dirname(fileURLToPath(import.meta.url)), 'src/utils'),
+			'#constants': resolve(dirname(fileURLToPath(import.meta.url)), 'src/constants'),
 		},
 	},
 })
