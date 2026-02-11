@@ -5,16 +5,19 @@ import FadeOut from '#components/FadeOut'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { findWeatherCondition } from '#utils/findWeatherCondition'
+import { useEffect } from 'react'
 
 const WeatherIn = () => {
 	const { city } = useParams()
 	const { data, isFetched } = useQuery(weatherQueryOptions(city as string))
 	const weather = data?.current?.condition.text
 	const localTime = data?.location?.localtime.split(' ')[1].split(':')[0]
-	
+
 	const url = findWeatherCondition(weather, localTime)
 
-	console.log(weather, localTime)
+	useEffect(() => {
+		console.log(data, isFetched)
+	}, [data])
 
 	useGSAP(() => {
 		if (isFetched) {
@@ -22,7 +25,7 @@ const WeatherIn = () => {
 				x: 0,
 				duration: 1,
 				stagger: 0.1,
-				delay: 0.3,
+				delay: 0.5,
 				ease: 'power1.inOut',
 			})
 		}
@@ -31,7 +34,7 @@ const WeatherIn = () => {
 	return (
 		<>
 			<FadeOut />
-			<img src={url} alt="" />
+			<img src={url} alt='' />
 		</>
 	)
 }
