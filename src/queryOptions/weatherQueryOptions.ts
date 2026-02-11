@@ -19,7 +19,7 @@ async function fetchSuggestions(
 	lang: 'uk' | 'en',
 ): Promise<ForecastResponse> {
 	const res = await fetch(
-		`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${search}&days=7&aqi=no&alerts=yes&lang=en
+		`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${search}&days=7&aqi=no&alerts=yes&lang=${lang}
 `,
 	)
 
