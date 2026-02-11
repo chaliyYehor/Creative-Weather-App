@@ -9,13 +9,14 @@ import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import gsap from 'gsap'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import autocompleteQueryOptions from '#queryOptions/autocompleteQueryOptions'
 import { Box } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
+import { useNavigate } from 'react-router-dom'
 
-const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
+const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 	scale: number
 }>(({ scale }) => ({
 	width: 320 * scale,
@@ -28,7 +29,7 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
 
 	'& .MuiInputBase-input': {
 		color: '#001e3c',
-		fontSize: 14 * scale,
+		fontSize: 16 * scale,
 		padding: `${10 * scale}px 8 * size}px`,
 	},
 
@@ -53,6 +54,7 @@ const searchSchema = z.object({
 type Search = z.infer<typeof searchSchema>
 
 export default function Search() {
+	const navigate = useNavigate()
 	const [value, setValue] = useState('')
 	const debouncedSearchTerm = useDebounce(value, 300)
 
@@ -76,15 +78,20 @@ export default function Search() {
 	} = useForm<Search>({ resolver: zodResolver(searchSchema) })
 
 	const onSubmit: SubmitHandler<Search> = async data => {
-		// gsap.to('.slicesWrapper div', {
-		// 	x: 0,
-		// 	duration: 1,
-		// 	stagger: 0.1,
-		// 	delay: 0.3,
-		// 	ease: 'power1.inOut',
-		// })
+		gsap.to('.slicesWrapper div', {
+			x: 0,
+			duration: 1,
+			stagger: 0.1,
+			delay: 0.3,
+			ease: 'power1.inOut',
+		})
 
-		console.log(data)
+		//sleepTimeForTheAnimation
+		await new Promise(res => setTimeout(res, 1500))
+
+		const formatedData = data.search.split(',')[0]
+
+		navigate(`/weatherIn/${formatedData}`)
 	}
 
 	return (
@@ -102,7 +109,6 @@ export default function Search() {
 					render={({ field }) => (
 						<StyledAutocomplete
 							scale={scale}
-							freeSolo
 							loading={isFetching}
 							options={
 								data?.results.map(
