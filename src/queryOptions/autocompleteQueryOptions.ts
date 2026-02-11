@@ -3,7 +3,10 @@ import { queryOptions } from '@tanstack/react-query'
 
 const API_KEY = import.meta.env.VITE_AUTOCOMPLETE_API_KEY
 
-export default function autocompleteQueryOptions(search: string) {
+export default function autocompleteQueryOptions(
+	search: string,
+	lang: 'uk' | 'en',
+) {
 	return queryOptions({
 		queryKey: ['autocomplete', search],
 		queryFn: () => fetchSuggestions(search),
@@ -13,6 +16,7 @@ export default function autocompleteQueryOptions(search: string) {
 
 async function fetchSuggestions(
 	search: string,
+	lang: 'uk' | 'en',
 ): Promise<GeoapifyAutocompleteResponse> {
 	const res = await fetch(
 		`https://api.geoapify.com/v1/geocode/autocomplete?text=${search}&type=city&limit=5&lang=en&format=json&apiKey=${API_KEY}
