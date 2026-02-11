@@ -15,6 +15,8 @@ import autocompleteQueryOptions from '#queryOptions/autocompleteQueryOptions'
 import { Box } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import type { RootType } from '#store/store'
 
 const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 	scale: number
@@ -54,12 +56,14 @@ const searchSchema = z.object({
 type Search = z.infer<typeof searchSchema>
 
 export default function Search() {
+	const lang = useSelector((state: RootType) => state.langSlice.lang)
+
 	const navigate = useNavigate()
 	const [value, setValue] = useState('')
 	const debouncedSearchTerm = useDebounce(value, 300)
 
 	const { data, isFetching } = useQuery(
-		autocompleteQueryOptions(debouncedSearchTerm),
+		autocompleteQueryOptions(debouncedSearchTerm, lang),
 	)
 
 	const isExtraSm = useMediaQuery('(max-width:355px)')

@@ -9,7 +9,7 @@ export default function autocompleteQueryOptions(
 ) {
 	return queryOptions({
 		queryKey: ['autocomplete', search],
-		queryFn: () => fetchSuggestions(search),
+		queryFn: () => fetchSuggestions(search, lang),
 		enabled: !!search,
 	})
 }
