@@ -6,10 +6,16 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { findWeatherCondition } from '#utils/findWeatherCondition'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import type { RootType } from '#store/store'
 
 const WeatherIn = () => {
+	const lang = useSelector((state: RootType) => state.langSlice.lang)
+
 	const { city } = useParams()
-	const { data, isFetched } = useQuery(weatherQueryOptions(city as string))
+	const { data, isFetched } = useQuery(
+		weatherQueryOptions(city as string, lang),
+	)
 	const weather = data?.current?.condition.text
 	const localTime = data?.location?.localtime.split(' ')[1].split(':')[0]
 
