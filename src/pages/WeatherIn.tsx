@@ -30,6 +30,7 @@ const WeatherIn = () => {
 			gsap.from('.slicesWrapper div', {
 				x: 0,
 				duration: 1,
+				pointerEvents: 'all',
 				stagger: 0.1,
 				delay: 0.5,
 				ease: 'power1.inOut',
@@ -47,7 +48,7 @@ const WeatherIn = () => {
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
 			>
 				<nav className='w-full pl-29.25 pt-9.25 absolute'>
-					<div className='logo w-22.5 h-11.75'>
+					<div className='logo w-22.5 h-11.75 select-none'>
 						<Link to={'/'}>
 							<img
 								className='w-full h-full'

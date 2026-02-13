@@ -46,6 +46,7 @@ export default function Search() {
 		gsap.to('.slicesWrapper div', {
 			x: 0,
 			duration: 1,
+			pointerEvents: 'all',
 			stagger: 0.1,
 			delay: 0.3,
 			ease: 'power1.inOut',
