@@ -28,13 +28,48 @@ export function findWeatherCondition(
 	function defineWeatherType() {
 		if (!givenCondition) return
 
-		if (heavyCloudsConditions.includes(givenCondition)) return 'heavyClouds'
-		if (clearConditions.includes(givenCondition)) return 'clear'
-		if (lightCloudsConditions.includes(givenCondition)) return 'lightClouds'
-		if (fogConditions.includes(givenCondition)) return 'foggy'
-		if (rainConditions.includes(givenCondition)) return 'rainy'
-		if (snowConditions.includes(givenCondition)) return 'snowy'
-		if (stormConditions.includes(givenCondition)) return 'storm'
+		if (
+			heavyCloudsConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'heavyClouds'
+		if (
+			clearConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'clear'
+		if (
+			lightCloudsConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'lightClouds'
+		if (
+			fogConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'foggy'
+		if (
+			rainConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'rainy'
+		if (
+			snowConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'snowy'
+		if (
+			stormConditions
+				.map(el => el.toLowerCase())
+				.includes(givenCondition.toLowerCase())
+		)
+			return 'storm'
 	}
 
 	const type = defineWeatherType()
