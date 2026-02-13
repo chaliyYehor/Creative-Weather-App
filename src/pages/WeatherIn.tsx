@@ -8,6 +8,7 @@ import { findWeatherCondition } from '#utils/findWeatherCondition'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
+import dayjs from 'dayjs'
 
 const WeatherIn = () => {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
@@ -21,8 +22,10 @@ const WeatherIn = () => {
 
 	const url = findWeatherCondition(weather, localTime)
 
+	const formatted = dayjs(data?.location.localtime).format('HH:mm - dddd, D MMM `YY')
+
 	useEffect(() => {
-		console.log(data, url)
+		console.log(data)
 	}, [data])
 
 	useGSAP(() => {
@@ -60,13 +63,19 @@ const WeatherIn = () => {
 				</nav>
 
 				<div className='mainInfoWrapper absolute left-29 bottom-21.25 flex items-center gap-2.5'>
-					<div className='temp text-[143px]'>16°</div>
+					<div className='temp text-[143px]'>
+						{data && Math.round(data?.current.temp_c)}°
+					</div>
 					<div className='generalInfo'>
-						<h3 className='text-[60px]'>London</h3>
-						<p className='text-[18px] -mt-2.5'>06:09 - Monday, 9 Sep `23</p>
+						<h3 className='text-[60px]'>{data?.location.name}</h3>
+						<p className='text-[18px] -mt-2.5'>{formatted}</p>
 					</div>
 					<div className='typeOfWeather w-27.5 h-27.5'>
-						<img className='w-full h-full' src={data?.current.condition.icon} alt='weather icon' />
+						<img
+							className='w-full h-full'
+							src={data?.current.condition.icon}
+							alt='weather icon'
+						/>
 					</div>
 				</div>
 

@@ -24,7 +24,6 @@ export function findWeatherCondition(
 		if (hour >= 6 && hour <= 11) return 'Morning'
 	}
 
-	console.log(givenCondition)
 	function defineWeatherType() {
 		if (!givenCondition) return
 
