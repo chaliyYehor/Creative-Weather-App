@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import langSliceReducer from '#store/slices/languageSlice'
+import loaderPlayedReducer from '#store/slices/loaderPlayed'
 import { autocompleteApi } from './services/autocompleteApi'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const store = configureStore({
 	reducer: {
 		langSlice: langSliceReducer,
+		loaderPlayed: loaderPlayedReducer,
 		[autocompleteApi.reducerPath]: autocompleteApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>
