@@ -109,3 +109,14 @@ body {
 
 	border-left: 5px solid rgba(255, 255, 255, 0.161);
 }
+
+.mainInfoWrapper {
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-variation-settings: 'wdth' 100;
+	
+	color: white;
+
+	text-shadow: 0px 0px 5px black;
+}

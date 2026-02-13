@@ -22,7 +22,7 @@ const WeatherIn = () => {
 	const url = findWeatherCondition(weather, localTime)
 
 	useEffect(() => {
-		console.log(data)
+		console.log(data, url)
 	}, [data])
 
 	useGSAP(() => {
@@ -46,17 +46,30 @@ const WeatherIn = () => {
 				}}
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
 			>
-				<nav>
-					<div className='logo'>
+				<nav className='w-full pl-29.25 pt-9.25 absolute'>
+					<div className='logo w-22.5 h-11.75'>
 						<Link to={'/'}>
-							<img src='/images/logo.svg' alt='logo' />
+							<img
+								className='w-full h-full'
+								src='/images/logo.svg'
+								alt='logo'
+							/>
 						</Link>
 					</div>
 				</nav>
 
-				<div className='mainInfoWrapper'></div>
+				<div className='mainInfoWrapper absolute left-29 bottom-21.25 flex items-center gap-2.5'>
+					<div className='temp text-[143px]'>16°</div>
+					<div className='generalInfo'>
+						<h3 className='text-[60px]'>London</h3>
+						<p className='text-[18px] -mt-2.5'>06:09 - Monday, 9 Sep `23</p>
+					</div>
+					<div className='typeOfWeather w-27.5 h-27.5'>
+						<img className='w-full h-full' src={data?.current.condition.icon} alt='weather icon' />
+					</div>
+				</div>
 
-				<div className='moreInfoWrapper w-131.5'></div>
+				<div className='moreInfoWrapper absolute right-0 top-0 w-131.5 h-full '></div>
 			</div>
 		</>
 	)
