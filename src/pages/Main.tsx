@@ -62,7 +62,6 @@ const MaterialUISwitch = styled(Switch)(() => ({
 export default function Main() {
 	const dispatch = useDispatch<AppDispatch>()
 	const language = useSelector((state: RootType) => state.langSlice.lang)
-	console.log(language)
 
 	const loaderRef = useRef<HTMLDivElement>(null)
 
