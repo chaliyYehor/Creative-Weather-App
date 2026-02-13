@@ -3,7 +3,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
 import { useDebounce } from '@uidotdev/usehooks'
 import TextField from '@mui/material/TextField'
-import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
+import { Controller, useForm, useFormContext, type SubmitHandler } from 'react-hook-form'
 import z from 'zod'
 import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
@@ -17,6 +17,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
+import type { Search } from '#types/form'
 
 const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 	scale: number
@@ -49,12 +50,6 @@ const StyledSubmitButton = styled(Button)(() => ({
 	},
 }))
 
-const searchSchema = z.object({
-	search: z.string().min(2),
-})
-
-type Search = z.infer<typeof searchSchema>
-
 export default function Search() {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
@@ -78,8 +73,9 @@ export default function Search() {
 	const {
 		control,
 		handleSubmit,
+		reset,
 		formState: { isSubmitting },
-	} = useForm<Search>({ resolver: zodResolver(searchSchema) })
+	} = useFormContext<Search>()
 
 	const onSubmit: SubmitHandler<Search> = async data => {
 		gsap.to('.slicesWrapper div', {
@@ -96,6 +92,8 @@ export default function Search() {
 		const formatedData = data.search.split(',')[0]
 
 		navigate(`/weatherIn/${formatedData}`)
+
+		reset()
 	}
 
 	return (
@@ -109,7 +107,6 @@ export default function Search() {
 				<Controller
 					name='search'
 					control={control}
-					defaultValue=''
 					render={({ field }) => (
 						<StyledAutocomplete
 							scale={scale}
