@@ -75,7 +75,11 @@ export const fogConditions = [
 	'Туман з памороззю',
 	'Туман',
 ]
-export const lightCloudsConditions = ['Partly Cloudy', 'Windy', 'Невелика хмарність']
+export const lightCloudsConditions = [
+	'Partly Cloudy',
+	'Windy',
+	'Невелика хмарність',
+]
 export const clearConditions = ['Clear', 'Sunny', 'Сонячно', 'Ясно']
 export const heavyCloudsConditions = [
 	'Overcast',
@@ -83,3 +87,28 @@ export const heavyCloudsConditions = [
 	'Суцільна хмарність',
 	'Хмарно',
 ]
+
+export const months = {
+	Jan: 'Січ',
+	Feb: 'Лют',
+	Mar: 'Бер',
+	Apr: 'Кві',
+	May: 'Тра',
+	Jun: 'Чер',
+	Jul: 'Лип',
+	Aug: 'Сер',
+	Sep: 'Вер',
+	Oct: 'Жов',
+	Nov: 'Лис',
+	Dec: 'Гру',
+}
+
+export const days = {
+	Monday: 'Понеділок',
+	Tuesday: 'Вівторок',
+	Wednesday: 'Середа',
+	Thursday: 'Четвер',
+	Friday: "П'ятниця",
+	Saturday: 'Субота',
+	Sunday: 'Неділя',
+}
