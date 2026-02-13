@@ -1,46 +1,14 @@
-import Autocomplete from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
 import { useDebounce } from '@uidotdev/usehooks'
-import TextField from '@mui/material/TextField'
-import {
-	Controller,
-	useFormContext,
-	type SubmitHandler,
-} from 'react-hook-form'
+import { useFormContext, type SubmitHandler } from 'react-hook-form'
 import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import gsap from 'gsap'
 import { useState } from 'react'
-import { Box } from '@mui/material'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import type { RootType } from '#store/store'
 import type { Search } from '#types/form'
-import { useGetDataQuery } from '#store/services/autocompleteApi'
-
-const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
-	scale: number
-}>(({ scale }) => ({
-	width: 320 * scale,
-
-	'& .MuiInputBase-root': {
-		backgroundColor: '#fff',
-		borderRadius: 5,
-		paddingLeft: 14 * scale,
-	},
-
-	'& .MuiInputBase-input': {
-		color: '#001e3c',
-		fontSize: 16 * scale,
-		padding: `${10 * scale}px 8 * size}px`,
-	},
-
-	'& label': {
-		color: 'black',
-	},
-}))
+import SearchInput from './SearchInput'
 
 const StyledSubmitButton = styled(Button)(() => ({
 	'&.Mui-disabled': {
@@ -52,19 +20,10 @@ const StyledSubmitButton = styled(Button)(() => ({
 }))
 
 export default function Search() {
-	const lang = useSelector((state: RootType) => state.langSlice.lang)
-
 	const navigate = useNavigate()
+
 	const [value, setValue] = useState('')
 	const debouncedSearchTerm = useDebounce(value, 300)
-
-	const { data, isFetching } = useGetDataQuery(
-		{
-			text: debouncedSearchTerm,
-			lang,
-		},
-		{ skip: !debouncedSearchTerm.trim() },
-	)
 
 	const isExtraSm = useMediaQuery('(max-width:355px)')
 	const isSmall = useMediaQuery('(max-width:600px)')
@@ -76,7 +35,6 @@ export default function Search() {
 	else if (isSmall) scale = 1
 
 	const {
-		control,
 		handleSubmit,
 		reset,
 		formState: { isSubmitting },
@@ -109,65 +67,13 @@ export default function Search() {
 				}
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<Controller
-					name='search'
-					control={control}
-					render={({ field }) => (
-						<StyledAutocomplete
-							scale={scale}
-							loading={isFetching}
-							options={
-								data?.results.map(
-									suggestion =>
-										`${suggestion?.city}${suggestion?.state === undefined || suggestion?.state === suggestion?.city ? '' : ', ' + suggestion?.state}${', ' + suggestion?.country}%${suggestion?.country_code}`,
-								) || []
-							}
-							value={field.value}
-							onChange={(_, value) => {
-								const data = value?.split('%')[0]
-
-								field.onChange(data ?? '')
-								setValue(data as string)
-							}}
-							onInputChange={(_, value) => {
-								const data = value?.split('%')[0]
-
-								field.onChange(data)
-								setValue(data)
-							}}
-							renderOption={(props, option) => {
-								const { key, ...rest } = props
-
-								const data = option.split('%')
-								return (
-									<li key={key} {...rest}>
-										<Box
-											sx={{
-												display: 'flex',
-												alignItems: 'center',
-												justifyContent: 'space-between',
-												width: '100%',
-											}}
-										>
-											<img
-												loading='lazy'
-												width='20'
-												srcSet={`https://flagcdn.com/w40/${data[1].toLowerCase()}.png 2x`}
-												src={`https://flagcdn.com/w20/${data[1].toLowerCase()}.png`}
-												alt=''
-											/>
-											<span>{data[0]}</span>
-											<LocationOnIcon fontSize='small' sx={{ opacity: 0.6 }} />
-										</Box>
-									</li>
-								)
-							}}
-							renderInput={params => (
-								<TextField {...params} placeholder='Weather in...' />
-							)}
-						/>
-					)}
+				<SearchInput
+					debouncedValue={debouncedSearchTerm}
+					scale={scale}
+					setValue={setValue}
+					typeOfInput={'homePage'}
 				/>
+
 				<div className='search'>
 					<StyledSubmitButton
 						disabled={isSubmitting}
