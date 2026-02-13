@@ -24,6 +24,10 @@ body {
 	width: 100%;
 }
 
+.loader-wrapper {
+	visibility: hidden;
+}
+
 .loader-day {
 	width: 60px;
 	aspect-ratio: 1;

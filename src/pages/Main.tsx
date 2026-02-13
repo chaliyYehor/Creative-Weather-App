@@ -10,6 +10,7 @@ import FadeOut from '#components/FadeOut'
 import type { AppDispatch, RootType } from '#store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeLang } from '#store/slices/languageSlice'
+import { setLoaderPlayed } from '#store/slices/loaderPlayed'
 
 const size = 1.3
 
@@ -62,46 +63,81 @@ const MaterialUISwitch = styled(Switch)(() => ({
 export default function Main() {
 	const dispatch = useDispatch<AppDispatch>()
 	const language = useSelector((state: RootType) => state.langSlice.lang)
+	const loaderPlayed = useSelector(
+		(state: RootType) => state.loaderPlayed.played,
+	)
 
 	const loaderRef = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
 		const tl = gsap.timeline()
 
-		tl.to(loaderRef.current!.children[0], {
-			autoAlpha: 0,
-			duration: 0.1,
-			delay: 0,
-		})
-			.to(
-				loaderRef.current,
-				{
-					autoAlpha: 0,
-					duration: 1,
-				},
-				'<0.5',
-			)
-			.from(
+		if (loaderPlayed) {
+			tl.from(
 				'.logo',
 				{
-					y: -30,
 					opacity: 0,
 					duration: 1.5,
 					ease: 'power1.out',
 				},
-				'<0.5',
+				'+0.5',
 			)
-			.from(
-				'.chooseCity',
-				{
-					y: 40,
-					opacity: 0,
-					duration: 1.5,
-					ease: 'power1.out',
-				},
-				'<0.5',
-			)
-	})
+				.from(
+					'.chooseCity',
+					{
+						opacity: 0,
+						duration: 1.5,
+						ease: 'power1.out',
+					},
+					'<',
+				)
+				.from(
+					'.languageSelect',
+					{
+						opacity: 0,
+						duration: 1.5,
+						ease: 'power1.out',
+					},
+					'<',
+				)
+		} else {
+			tl.from(loaderRef.current!.children[0], {
+				autoAlpha: 1,
+				duration: 1,
+				delay: 2,
+			})
+				.from(
+					loaderRef.current,
+					{
+						autoAlpha: 1,
+						duration: 1,
+					},
+					'<0.5',
+				)
+				.from(
+					'.logo',
+					{
+						y: -30,
+						opacity: 0,
+						duration: 1.5,
+						ease: 'power1.out',
+					},
+					'<0.5',
+				)
+				.from(
+					'.chooseCity',
+					{
+						y: 40,
+						opacity: 0,
+						duration: 1.5,
+						ease: 'power1.out',
+					},
+					'<0.5',
+				)
+		}
+
+		dispatch(setLoaderPlayed())
+	}, [loaderPlayed])
 
 	return (
 		<>
