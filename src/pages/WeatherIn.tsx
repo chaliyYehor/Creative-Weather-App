@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import weatherQueryOptions from '#queryOptions/weatherQueryOptions'
 import FadeOut from '#components/FadeOut'
 import { useGSAP } from '@gsap/react'
@@ -40,7 +40,12 @@ const WeatherIn = () => {
 	return (
 		<>
 			<FadeOut />
-			<img src={url} alt='' />
+			<div
+				style={{
+					backgroundImage: `url(${url})`,
+				}}
+				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start'
+			></div>
 		</>
 	)
 }
