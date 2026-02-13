@@ -1,23 +1,24 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import Autocomplete from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
 import { useDebounce } from '@uidotdev/usehooks'
 import TextField from '@mui/material/TextField'
-import { Controller, useForm, useFormContext, type SubmitHandler } from 'react-hook-form'
-import z from 'zod'
+import {
+	Controller,
+	useFormContext,
+	type SubmitHandler,
+} from 'react-hook-form'
 import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import gsap from 'gsap'
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import autocompleteQueryOptions from '#queryOptions/autocompleteQueryOptions'
 import { Box } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
 import type { Search } from '#types/form'
+import { useGetDataQuery } from '#store/services/autocompleteApi'
 
 const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 	scale: number
@@ -57,8 +58,12 @@ export default function Search() {
 	const [value, setValue] = useState('')
 	const debouncedSearchTerm = useDebounce(value, 300)
 
-	const { data, isFetching } = useQuery(
-		autocompleteQueryOptions(debouncedSearchTerm, lang),
+	const { data, isFetching } = useGetDataQuery(
+		{
+			text: debouncedSearchTerm,
+			lang,
+		},
+		{ skip: !debouncedSearchTerm.trim() },
 	)
 
 	const isExtraSm = useMediaQuery('(max-width:355px)')
