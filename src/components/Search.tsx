@@ -41,6 +41,8 @@ export default function Search() {
 	} = useFormContext<Search>()
 
 	const onSubmit: SubmitHandler<Search> = async data => {
+		;(document.activeElement as HTMLElement)?.blur()
+
 		gsap.to('.slicesWrapper div', {
 			x: 0,
 			duration: 1,
