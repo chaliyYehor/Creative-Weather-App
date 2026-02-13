@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import weatherQueryOptions from '#queryOptions/weatherQueryOptions'
 import FadeOut from '#components/FadeOut'
 import { useGSAP } from '@gsap/react'
@@ -22,7 +22,7 @@ const WeatherIn = () => {
 	const url = findWeatherCondition(weather, localTime)
 
 	useEffect(() => {
-		console.log(data, isFetched)
+		console.log(data)
 	}, [data])
 
 	useGSAP(() => {
@@ -44,8 +44,20 @@ const WeatherIn = () => {
 				style={{
 					backgroundImage: `url(${url})`,
 				}}
-				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start'
-			></div>
+				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
+			>
+				<nav>
+					<div className='logo'>
+						<Link to={'/'}>
+							<img src='/images/logo.svg' alt='logo' />
+						</Link>
+					</div>
+				</nav>
+
+				<div className='mainInfoWrapper'></div>
+
+				<div className='moreInfoWrapper w-131.5'></div>
+			</div>
 		</>
 	)
 }
