@@ -18,7 +18,7 @@ const RecentlyViewed = () => {
 				<div className='listWrapper h-full overflow-auto w-full'>
 					<ul className='flex flex-col gap-2'>
 						{places.reverse().map((place, index) => (
-							<RecentlyViewedCard key={index} text={place} />
+							<RecentlyViewedCard key={index} place={place} />
 						))}
 					</ul>
 				</div>
