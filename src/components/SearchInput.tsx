@@ -109,7 +109,7 @@ function SearchInput({
 					options={
 						data?.results.map(
 							suggestion =>
-								`${suggestion?.city}${suggestion?.state === undefined || suggestion?.state === suggestion?.city ? '' : ', ' + suggestion?.state}${', ' + suggestion?.country}%${suggestion?.country_code}`,
+								`${suggestion?.city}${suggestion?.state === undefined || suggestion?.state === suggestion?.city ? '' : ', ' + suggestion?.state}${', ' + suggestion?.country}%${suggestion?.country_code}latLon${suggestion.lat},${suggestion.lon}`,
 						) || []
 					}
 					value={field.value}
@@ -129,6 +129,8 @@ function SearchInput({
 						const { key, ...rest } = props
 
 						const data = option.split('%')
+						const iconSrc = data[1].split('latLon')[0]
+
 						return (
 							<li key={key} {...rest}>
 								<Box
@@ -142,9 +144,9 @@ function SearchInput({
 									<img
 										loading='lazy'
 										width='20'
-										srcSet={`https://flagcdn.com/w40/${data[1].toLowerCase()}.png 2x`}
-										src={`https://flagcdn.com/w20/${data[1].toLowerCase()}.png`}
-										alt=''
+										srcSet={`https://flagcdn.com/w40/${iconSrc.toLowerCase()}.png 2x`}
+										src={`https://flagcdn.com/w20/${iconSrc.toLowerCase()}.png`}
+										alt='country icon'
 									/>
 									<span>{data[0]}</span>
 									<LocationOnIcon fontSize='small' sx={{ opacity: 0.6 }} />
