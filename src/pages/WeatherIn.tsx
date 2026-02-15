@@ -15,14 +15,9 @@ const WeatherIn = () => {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const pageId = useParams()
-	let cityName
-	if (lang === 'uk') {
-		if (!pageId.city) return
+	let cityName = pageId.city && pageId.city.split('&')[1]
 
-		const city = pageId.city.split('&')[1]
-
-		cityName = city
-	}
+	console.log(cityName)
 
 	const { city } = useParams()
 	const { data, isFetched } = useQuery(
@@ -32,6 +27,8 @@ const WeatherIn = () => {
 	const localTime = data?.location?.localtime.split(' ')[1].split(':')[0]
 
 	const url = findWeatherCondition(weather, localTime)
+
+	console.log(weather)
 
 	const formatted = dayjs(data?.location.localtime)
 		.locale(lang === 'en' ? 'en' : 'uk')

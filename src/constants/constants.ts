@@ -38,6 +38,7 @@ export const urlVariants = {
 export const stormConditions = ['Thundery outbreaks in nearby', 'Місцями грози']
 export const snowConditions = [
 	'Patchy snow nearby',
+	'Heavy snow',
 	'Freezing drizzle',
 	'Heavy freezing drizzle',
 	'Patchy freezing drizzle nearby',
@@ -45,6 +46,7 @@ export const snowConditions = [
 	'Blizzard',
 	'Заметіль',
 	'Сильна ожеледиця',
+	'Сильний сніг',
 	'Ожеледиця',
 	'Низова хуртовина',
 	'Місцями сніг',
