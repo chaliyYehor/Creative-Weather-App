@@ -39,7 +39,7 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 	const { data } = useQuery(weatherQueryOptions(city as string, lang))
 
 	return (
-		<div onClick={() => getMoreInfo()} className='cardWrapper border-2 border-white/30 w-full h-20 rounded-sm text-2xl hover:border-white/50 transition grid gap-2 grid-cols-[60%_1fr_1fr]'>
+		<div onClick={() => getMoreInfo()} className=' border-2 border-white/30 w-full h-15 md:h-20 rounded-sm text-xl md:text-3xl hover:border-white/50 transition grid gap-2 grid-cols-[60%_1fr_1fr]'>
 			<div className='city flex items-center gap-5 pl-5 w-full h-full'>
 				<h3>{place.includes('&') ? place.split('&')[0] : place}</h3>
 			</div>
@@ -48,7 +48,7 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 				<img src={data?.current.condition.icon} alt='weathter type' />
 			</div>
 
-			<div className='temp w-full h-full flex items-center justify-center text-3xl'>
+			<div className='temp w-full h-full flex items-center justify-center text-2xl md:text-3xl'>
 				{`${data?.current && Math.round(data?.current.temp_c)}°`}
 			</div>
 		</div>
