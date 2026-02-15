@@ -171,9 +171,8 @@ export default function Main() {
 
 				<div className='chooseCity w-full h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
 					<Search />
+					<RecentlyViewed />
 				</div>
-
-				<RecentlyViewed />
 			</section>
 		</>
 	)
