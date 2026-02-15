@@ -9,6 +9,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { Search } from '#types/form'
 import SearchInput from './SearchInput'
+import { useSelector } from 'react-redux'
+import type { RootType } from '#store/store'
 
 const StyledSubmitButton = styled(Button)(() => ({
 	'&.Mui-disabled': {
@@ -20,8 +22,12 @@ const StyledSubmitButton = styled(Button)(() => ({
 }))
 
 export default function Search() {
+	const lang = useSelector((state: RootType) => state.langSlice.lang)
+
 	const navigate = useNavigate()
 
+	const [latLon, setLatLon] = useState('')
+	const [isOptionSelected, setIsOptionSelected] = useState(false)
 	const [value, setValue] = useState('')
 	const debouncedSearchTerm = useDebounce(value, 300)
 
@@ -57,7 +63,11 @@ export default function Search() {
 
 		const formatedData = data.search.split(',')[0]
 
-		navigate(`/weatherIn/${formatedData}`)
+		if (lang === 'en') {
+			navigate(`/weatherIn/${formatedData}`)
+		} else {
+			navigate(`/weatherin/${latLon}&${formatedData}`)
+		}
 
 		reset()
 	}
@@ -73,13 +83,15 @@ export default function Search() {
 				<SearchInput
 					debouncedValue={debouncedSearchTerm}
 					scale={scale}
+					setIsOptionSelected={setIsOptionSelected}
 					setValue={setValue}
+					setLatLon={setLatLon}
 					typeOfInput={'homePage'}
 				/>
 
 				<div className='search'>
 					<StyledSubmitButton
-						disabled={isSubmitting}
+						disabled={!isOptionSelected || isSubmitting}
 						sx={{ height: '50px', fontSize: '1.1rem', borderRadius: '25px' }}
 						variant='contained'
 						startIcon={isLarge || isSmall ? <SearchIcon /> : ''}
