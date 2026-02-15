@@ -3,38 +3,8 @@ import RecentlyViewedCard from './RecentlyViewedCard'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
 const RecentlyViewed = () => {
-	const [places, setPlaces] = useLocalStorage('places', [])
+	const [places, setPlaces] = useLocalStorage<string[]>('places', [])
 	console.log(places)
-
-	const placesArr = [
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-		'London',
-		'Bila Tserkva',
-		'Rome',
-	]
 
 	return (
 		<>
@@ -47,7 +17,7 @@ const RecentlyViewed = () => {
 
 				<div className='listWrapper h-full overflow-auto w-full'>
 					<ul className='flex flex-col gap-2'>
-						{placesArr.map((place, index) => (
+						{places.reverse().map((place, index) => (
 							<RecentlyViewedCard key={index} text={place} />
 						))}
 					</ul>
