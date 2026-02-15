@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { changeLang } from '#store/slices/languageSlice'
 import { setLoaderPlayed } from '#store/slices/loaderPlayed'
 import RecentlyViewed from '#components/RecentlyViewed'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 const size = 1.3
 
@@ -62,6 +63,8 @@ const MaterialUISwitch = styled(Switch)(() => ({
 }))
 
 export default function Main() {
+	const [places] = useLocalStorage<string[]>('places')
+
 	const dispatch = useDispatch<AppDispatch>()
 	const language = useSelector((state: RootType) => state.langSlice.lang)
 	const loaderPlayed = useSelector(
@@ -171,7 +174,7 @@ export default function Main() {
 
 				<div className='chooseCity w-full h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
 					<Search />
-					<RecentlyViewed />
+					{places.length >= 1 && <RecentlyViewed />}
 				</div>
 			</section>
 		</>
