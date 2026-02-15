@@ -22,7 +22,7 @@ const StyledSubmitButton = styled(Button)(() => ({
 }))
 
 export default function Search() {
-	const [places, setPlaces] = useLocalStorage<string[]>('places', [])
+	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
 
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
