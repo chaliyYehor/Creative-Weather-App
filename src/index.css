@@ -119,8 +119,21 @@ body {
 	font-optical-sizing: auto;
 	font-style: normal;
 	font-variation-settings: 'wdth' 100;
-	
+
 	color: white;
 
 	text-shadow: 0px 0px 5px black;
+}
+
+.recentlyViewedWrapper {
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-variation-settings: 'wdth' 100;
+
+	text-shadow: 0px 0px 5px black;
+}
+
+.listWrapper {
+	scrollbar-width: none;
 }
