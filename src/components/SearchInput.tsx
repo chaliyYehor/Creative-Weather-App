@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
 import { SearchIcon } from 'lucide-react'
 
-const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
+const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 	scale: number
 	variant: 'homePage' | 'weatherPage'
 }>(({ scale, variant }) => {
@@ -43,7 +43,7 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
 				'& .MuiInputBase-input': {
 					color: '#fff',
 					fontSize: 16 * scale,
-					padding: `${10 * scale}px ${8 * scale}px`, // ← исправь size
+					padding: `${10 * scale}px ${8 * scale}px`,
 				},
 
 				'& label': {
@@ -73,6 +73,8 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, true>)<{
 
 type SearchInputProps = {
 	setValue: React.Dispatch<React.SetStateAction<string>>
+	setLatLon: React.Dispatch<React.SetStateAction<string>>
+	setIsOptionSelected: React.Dispatch<React.SetStateAction<boolean>>
 	scale: number
 	debouncedValue: string
 	typeOfInput: 'homePage' | 'weatherPage'
@@ -80,6 +82,8 @@ type SearchInputProps = {
 
 function SearchInput({
 	setValue,
+	setLatLon,
+	setIsOptionSelected,
 	scale,
 	debouncedValue,
 	typeOfInput,
@@ -93,8 +97,6 @@ function SearchInput({
 		{ skip: !debouncedValue || !debouncedValue.trim() },
 	)
 
-	console.log(data)
-
 	return (
 		<Controller
 			name='search'
@@ -104,7 +106,6 @@ function SearchInput({
 				<StyledAutocomplete
 					variant={typeOfInput}
 					scale={scale}
-					freeSolo
 					loading={isFetching}
 					options={
 						data?.results.map(
@@ -114,16 +115,24 @@ function SearchInput({
 					}
 					value={field.value}
 					onChange={(_, value) => {
-						const data = value?.split('%')[0]
+						if (!value) return
 
-						field.onChange(data ?? '')
-						setValue(data as string)
-					}}
-					onInputChange={(_, value) => {
-						const data = value?.split('%')[0]
+						const latLon = value.split('latLon')[1]
+						const data = value.split('%')[0]
 
 						field.onChange(data)
 						setValue(data)
+						setIsOptionSelected(true)
+						setLatLon(latLon)
+					}}
+					onInputChange={(_, value, reason) => {
+						if (reason !== 'input') return
+
+						const data = value.split('%')[0]
+
+						field.onChange(data)
+						setValue(data)
+						setIsOptionSelected(false)
 					}}
 					renderOption={(props, option) => {
 						const { key, ...rest } = props
