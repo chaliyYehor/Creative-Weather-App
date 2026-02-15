@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
 import dayjs from 'dayjs'
+import 'dayjs/locale/uk'
 
 const WeatherIn = () => {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
@@ -22,7 +23,9 @@ const WeatherIn = () => {
 
 	const url = findWeatherCondition(weather, localTime)
 
-	const formatted = dayjs(data?.location.localtime).format('HH:mm - dddd, D MMM `YY')
+	const formatted = dayjs(data?.location.localtime)
+		.locale(lang === 'en' ? 'en' : 'uk')
+		.format('HH:mm - dddd, D MMM YY')
 
 	useEffect(() => {
 		console.log(data)
