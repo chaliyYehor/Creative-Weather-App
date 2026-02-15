@@ -81,7 +81,7 @@ export default function Search() {
 
 		reset()
 	}
-	console.log(places)
+
 	return (
 		<>
 			<form
