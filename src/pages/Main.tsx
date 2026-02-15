@@ -11,6 +11,7 @@ import type { AppDispatch, RootType } from '#store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeLang } from '#store/slices/languageSlice'
 import { setLoaderPlayed } from '#store/slices/loaderPlayed'
+import RecentlyViewed from '#components/RecentlyViewed'
 
 const size = 1.3
 
@@ -171,6 +172,8 @@ export default function Main() {
 				<div className='chooseCity w-full h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
 					<Search />
 				</div>
+
+				<RecentlyViewed />
 			</section>
 		</>
 	)
