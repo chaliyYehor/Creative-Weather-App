@@ -14,6 +14,16 @@ import 'dayjs/locale/uk'
 const WeatherIn = () => {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
+	const pageId = useParams()
+	let cityName
+	if (lang === 'uk') {
+		if (!pageId.city) return
+
+		const city = pageId.city.split('&')[1]
+
+		cityName = city
+	}
+
 	const { city } = useParams()
 	const { data, isFetched } = useQuery(
 		weatherQueryOptions(city as string, lang),
@@ -70,7 +80,7 @@ const WeatherIn = () => {
 						{data && Math.round(data?.current.temp_c)}°
 					</div>
 					<div className='generalInfo'>
-						<h3 className='text-[60px]'>{data?.location.name}</h3>
+						<h3 className='text-[60px]'>{cityName ? cityName : data?.location.name}</h3>
 						<p className='text-[18px] -mt-2.5'>{formatted}</p>
 					</div>
 					<div className='typeOfWeather w-27.5 h-27.5'>
