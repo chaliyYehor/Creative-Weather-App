@@ -172,9 +172,9 @@ export default function Main() {
 					</div>
 				</header>
 
-				<div className='chooseCity w-full h-full flex flex-col justify-start pt-20 md:pt-50 items-center'>
+				<div className='chooseCity w-full h-full flex flex-col justify-start pt-5 md:pt-50 items-center'>
 					<Search />
-					{places.length >= 1 && <RecentlyViewed />}
+					{places && places.length >= 1 && <RecentlyViewed />}
 				</div>
 			</section>
 		</>
