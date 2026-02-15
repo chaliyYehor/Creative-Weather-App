@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles'
-import { useDebounce } from '@uidotdev/usehooks'
+import { useDebounce, useLocalStorage } from '@uidotdev/usehooks'
 import { useFormContext, type SubmitHandler } from 'react-hook-form'
 import { Search as SearchIcon } from 'lucide-react'
 import Button from '@mui/material/Button'
@@ -22,6 +22,8 @@ const StyledSubmitButton = styled(Button)(() => ({
 }))
 
 export default function Search() {
+	const [places, setPlaces] = useLocalStorage<string[]>('places', [])
+
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const navigate = useNavigate()
@@ -62,6 +64,8 @@ export default function Search() {
 		await new Promise(res => setTimeout(res, 1500))
 
 		const formatedData = data.search.split(',')[0]
+		const formatedDataStorage =
+			lang === 'uk' ? `${formatedData}&${latLon}` : formatedData
 
 		if (lang === 'en') {
 			navigate(`/weatherIn/${formatedData}`)
@@ -69,9 +73,15 @@ export default function Search() {
 			navigate(`/weatherin/${latLon}&${formatedData}`)
 		}
 
+		setPlaces(places => {
+			return formatedDataStorage === places[places.length - 1]
+				? [...places]
+				: [...places, formatedDataStorage]
+		})
+
 		reset()
 	}
-
+	console.log(places)
 	return (
 		<>
 			<form
