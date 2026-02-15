@@ -93,6 +93,8 @@ function SearchInput({
 		{ skip: !debouncedValue || !debouncedValue.trim() },
 	)
 
+	console.log(data)
+
 	return (
 		<Controller
 			name='search'
