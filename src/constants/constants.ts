@@ -39,6 +39,8 @@ export const stormConditions = ['Thundery outbreaks in nearby', 'Місцями 
 export const snowConditions = [
 	'Patchy snow nearby',
 	'Heavy snow',
+	'Moderate or heavy sleet',
+	'Помірний або сильний дощ зі снігом',
 	'Freezing drizzle',
 	'Heavy freezing drizzle',
 	'Patchy freezing drizzle nearby',
