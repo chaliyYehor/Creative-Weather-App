@@ -13,8 +13,15 @@ import 'dayjs/locale/uk'
 import SearchInput from '#components/SearchInput'
 import { SearchIcon } from 'lucide-react'
 import { SearchContext } from '#constants/searchContext'
+import { useFormContext } from 'react-hook-form'
+import type { Search } from '#types/form'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 const WeatherIn = () => {
+	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
+
+	const { reset } = useFormContext<Search>()
+
 	const navigate = useNavigate()
 
 	const [searchValue, setSearchValue] = useState('')
@@ -73,10 +80,16 @@ const WeatherIn = () => {
 		console.log(`formatted data for LS: ${formatedDataStorage}`)
 
 		if (lang === 'en') {
-			console.log(`/weatherIn/${formatedData}?weatherPage`)
+			navigate(`/weatherIn/${formatedData}?weatherPage`)
 		} else {
-			console.log(`/weatherin/${latLon}&${formatedData}?weatherPage`)
+			navigate(`/weatherin/${latLon}&${formatedData}?weatherPage`)
 		}
+
+		setPlaces(places => {
+			return formatedDataStorage === places[places.length - 1]
+				? [...places]
+				: [...places, formatedDataStorage]
+		})
 	}
 
 	return (
@@ -95,14 +108,18 @@ const WeatherIn = () => {
 						typeOfInput='weatherPage'
 					/>
 
-					<button className='cursor-pointer' onClick={submit} disabled={!isOptionSelected}>
+					<button
+						className='cursor-pointer'
+						onClick={submit}
+						disabled={!isOptionSelected}
+					>
 						<SearchIcon color='white' />
 					</button>
 				</div>
 
 				<nav className='w-full pl-5 pt-5 absolute'>
 					<div className='logo w-9.75 h-5 select-none'>
-						<Link to={'/'}>
+						<Link to={'/'} onClick={() => reset()}>
 							<img
 								className='w-full h-full'
 								src='/images/logo.svg'
