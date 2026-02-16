@@ -29,9 +29,11 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 
 		//sleepTimeForTheAnimation
 		await new Promise(res => setTimeout(res, 1500))
-		
+
 		const latLon = place.includes('&') && place.split('&')[1]
-		const properUrl = place.includes('&') ? `${latLon}&${place.split('&')[0]}` : place
+		const properUrl = place.includes('&')
+			? `${latLon}&${place.split('&')[0]}`
+			: place
 
 		navigate(`/weatherIn/${properUrl}`)
 	}
@@ -39,7 +41,10 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 	const { data } = useQuery(weatherQueryOptions(city as string, lang))
 
 	return (
-		<div onClick={() => getMoreInfo()} className='cardWrapper border-2 border-white/30 w-full h-15 md:h-20 rounded-sm text-xl md:text-3xl hover:border-white/50 transition grid gap-2 grid-cols-[60%_1fr_1fr]'>
+		<div
+			onClick={() => getMoreInfo()}
+			className='cardWrapper border-2 border-white/30 w-full h-15 md:h-20 rounded-sm text-xl md:text-3xl hover:border-white/50 transition grid gap-2 grid-cols-[60%_1fr_1fr]'
+		>
 			<div className='city flex items-center gap-5 pl-5 w-full h-full'>
 				<h3>{place.includes('&') ? place.split('&')[0] : place}</h3>
 			</div>

@@ -17,8 +17,6 @@ const WeatherIn = () => {
 	const pageId = useParams()
 	let cityName = pageId.city && pageId.city.split('&')[1]
 
-	console.log(cityName)
-
 	const { city } = useParams()
 	const { data, isFetched } = useQuery(
 		weatherQueryOptions(city as string, lang),
@@ -60,8 +58,8 @@ const WeatherIn = () => {
 				}}
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
 			>
-				<nav className='w-full pl-29.25 pt-9.25 absolute'>
-					<div className='logo w-22.5 h-11.75 select-none'>
+				<nav className='w-full pl-5 pt-5 absolute'>
+					<div className='logo w-9.75 h-5 select-none'>
 						<Link to={'/'}>
 							<img
 								className='w-full h-full'
@@ -72,15 +70,15 @@ const WeatherIn = () => {
 					</div>
 				</nav>
 
-				<div className='mainInfoWrapper absolute left-29 bottom-21.25 flex items-center gap-2.5'>
-					<div className='temp text-[143px]'>
+				<div className='mainInfoWrapper absolute left-5 top-[25vh] flex items-center gap-2.5'>
+					<div className='temp text-[48px]'>
 						{data && Math.round(data?.current.temp_c)}°
 					</div>
-					<div className='generalInfo'>
-						<h3 className='text-[60px]'>{cityName ? cityName : data?.location.name}</h3>
-						<p className='text-[18px] -mt-2.5'>{formatted}</p>
+					<div className='generalInfo flex flex-col gap-1'>
+						<h3 className='text-[20px]'>{cityName ? cityName : data?.location.name}</h3>
+						<p className='text-[10px] -mt-2.5'>{formatted}</p>
 					</div>
-					<div className='typeOfWeather w-27.5 h-27.5'>
+					<div className='typeOfWeather w-10 h-10'>
 						<img
 							className='w-full h-full'
 							src={data?.current.condition.icon}
@@ -89,7 +87,7 @@ const WeatherIn = () => {
 					</div>
 				</div>
 
-				<div className='moreInfoWrapper absolute right-0 top-0 w-131.5 h-full '></div>
+				<div className='moreInfoWrapper absolute bottom-0 left-0 w-full h-[60vh] '></div>
 			</div>
 		</>
 	)
