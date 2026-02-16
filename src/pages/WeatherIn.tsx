@@ -104,7 +104,7 @@ const WeatherIn = () => {
 				}}
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
 			>
-				<div className='searchWrapper flex absolute right-5 top-3 z-10'>
+				<div className='searchWrapper flex absolute right-5 top-4 z-10'>
 					<SearchInput
 						setNeededValue={setSearchValue}
 						typeOfInput='weatherPage'
