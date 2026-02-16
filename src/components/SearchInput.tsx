@@ -7,6 +7,8 @@ import { useGetDataQuery } from '#store/services/autocompleteApi'
 import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
 import { SearchIcon } from 'lucide-react'
+import { useContext } from 'react'
+import { SearchContext } from '#constants/searchContext'
 
 const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 	scale: number
@@ -71,23 +73,19 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 			}
 })
 
-type SearchInputProps = {
-	setValue: React.Dispatch<React.SetStateAction<string>>
-	setLatLon: React.Dispatch<React.SetStateAction<string>>
-	setIsOptionSelected: React.Dispatch<React.SetStateAction<boolean>>
-	scale: number
-	debouncedValue: string
+type SearchInputProp = {
 	typeOfInput: 'homePage' | 'weatherPage'
 }
 
-function SearchInput({
-	setValue,
-	setLatLon,
-	setIsOptionSelected,
-	scale,
-	debouncedValue,
-	typeOfInput,
-}: SearchInputProps) {
+function SearchInput({ typeOfInput }: SearchInputProp) {
+	const ctx = useContext(SearchContext)
+
+	if (!ctx) {
+		throw new Error('SearchContext must be used within SearchContext.Provider')
+	}
+	const { setValue, setLatLon, setIsOptionSelected, scale, debouncedValue } =
+		ctx
+
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const { control } = useFormContext<Search>()

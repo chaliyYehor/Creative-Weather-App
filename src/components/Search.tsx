@@ -1,16 +1,16 @@
-import { styled } from '@mui/material/styles'
-import { useDebounce, useLocalStorage } from '@uidotdev/usehooks'
-import { useFormContext, type SubmitHandler } from 'react-hook-form'
-import { Search as SearchIcon } from 'lucide-react'
-import Button from '@mui/material/Button'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import gsap from 'gsap'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import type { Search } from '#types/form'
-import SearchInput from './SearchInput'
-import { useSelector } from 'react-redux'
+import { SearchContext } from '#constants/searchContext'
 import type { RootType } from '#store/store'
+import type { Search } from '#types/form'
+import Button from '@mui/material/Button'
+import { styled } from '@mui/material/styles'
+import { useLocalStorage } from '@uidotdev/usehooks'
+import gsap from 'gsap'
+import { Search as SearchIcon } from 'lucide-react'
+import { useContext } from 'react'
+import { useFormContext, type SubmitHandler } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import SearchInput from './SearchInput'
 
 const StyledSubmitButton = styled(Button)(() => ({
 	'&.Mui-disabled': {
@@ -22,25 +22,23 @@ const StyledSubmitButton = styled(Button)(() => ({
 }))
 
 export default function Search() {
+	const ctx = useContext(SearchContext)
+
+	if (!ctx) {
+		throw new Error('SearchContext must be used within SearchContext.Provider')
+	}
+	const {
+		latLon,
+		isLarge,
+		isSmall,
+		isOptionSelected,
+	} = ctx
+
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
 
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const navigate = useNavigate()
-
-	const [latLon, setLatLon] = useState('')
-	const [isOptionSelected, setIsOptionSelected] = useState(false)
-	const [value, setValue] = useState('')
-	const debouncedSearchTerm = useDebounce(value, 300)
-
-	const isExtraSm = useMediaQuery('(max-width:355px)')
-	const isSmall = useMediaQuery('(max-width:600px)')
-	const isLarge = useMediaQuery('(min-width:1025px)')
-
-	let scale = 1.3
-
-	if (isExtraSm) scale = 0.8
-	else if (isSmall) scale = 1
 
 	const {
 		handleSubmit,
@@ -90,14 +88,7 @@ export default function Search() {
 				}
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<SearchInput
-					debouncedValue={debouncedSearchTerm}
-					scale={scale}
-					setIsOptionSelected={setIsOptionSelected}
-					setValue={setValue}
-					setLatLon={setLatLon}
-					typeOfInput={'homePage'}
-				/>
+				<SearchInput typeOfInput={'homePage'} />
 
 				<div className='search'>
 					<StyledSubmitButton
