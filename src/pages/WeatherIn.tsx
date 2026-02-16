@@ -36,7 +36,9 @@ const WeatherIn = () => {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const pageId = useParams()
-	let cityName = pageId.city && pageId.city.split('&')[1]
+	let cityName = pageId.city && lang === 'en' ? pageId.city.split('&')[1] : pageId.city!.split('&')[1].split('$')[0]
+	const navigatedFrom =
+		pageId.city && (pageId.city.split('$')[1] as 'homePage' | 'weatherPage')
 
 	const { city } = useParams()
 	const { data, isFetched } = useQuery(
@@ -58,7 +60,7 @@ const WeatherIn = () => {
 	}, [data])
 
 	useGSAP(() => {
-		if (isFetched) {
+		if (isFetched && navigatedFrom === 'homePage') {
 			gsap.from('.slicesWrapper div', {
 				x: 0,
 				duration: 1,
@@ -80,9 +82,9 @@ const WeatherIn = () => {
 		console.log(`formatted data for LS: ${formatedDataStorage}`)
 
 		if (lang === 'en') {
-			navigate(`/weatherIn/${formatedData}?weatherPage`)
+			navigate(`/weatherIn/${formatedData}$weatherPage`)
 		} else {
-			navigate(`/weatherin/${latLon}&${formatedData}?weatherPage`)
+			navigate(`/weatherin/${latLon}&${formatedData}$weatherPage`)
 		}
 
 		setPlaces(places => {
