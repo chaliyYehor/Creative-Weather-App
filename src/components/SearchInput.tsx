@@ -35,7 +35,7 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 				},
 			}
 		: {
-				width: 320 * scale,
+				width: 220 * scale,
 
 				'& .MuiInputBase-root': {
 					borderRadius: 5,
@@ -75,9 +75,10 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 
 type SearchInputProp = {
 	typeOfInput: 'homePage' | 'weatherPage'
+	setNeededValue?: React.Dispatch<React.SetStateAction<string>>
 }
 
-function SearchInput({ typeOfInput }: SearchInputProp) {
+function SearchInput({ typeOfInput, setNeededValue }: SearchInputProp) {
 	const ctx = useContext(SearchContext)
 
 	if (!ctx) {
@@ -122,6 +123,8 @@ function SearchInput({ typeOfInput }: SearchInputProp) {
 						setValue(data)
 						setIsOptionSelected(true)
 						setLatLon(latLon)
+
+						setNeededValue && setNeededValue(`${data}&${latLon}`)
 					}}
 					onInputChange={(_, value, reason) => {
 						if (reason !== 'input') return
@@ -166,24 +169,6 @@ function SearchInput({ typeOfInput }: SearchInputProp) {
 							{...params}
 							variant={typeOfInput === 'weatherPage' ? 'standard' : 'outlined'}
 							placeholder='Weather in...'
-							slotProps={{
-								input: {
-									...params.InputProps,
-									endAdornment: (
-										<>
-											{params.InputProps?.endAdornment}
-
-											<SearchIcon
-												size={24}
-												style={{
-													marginRight: 6,
-													color: '#fff',
-												}}
-											/>
-										</>
-									),
-								},
-							}}
 						/>
 					)}
 				/>
