@@ -61,9 +61,9 @@ export default function Search() {
 			lang === 'uk' ? `${formatedData}&${latLon}` : formatedData
 
 		if (lang === 'en') {
-			navigate(`/weatherIn/${formatedData}?homePage`)
+			navigate(`/weatherIn/${formatedData}$homePage`)
 		} else {
-			navigate(`/weatherin/${latLon}&${formatedData}?homePage`)
+			navigate(`/weatherin/${latLon}&${formatedData}$homePage`)
 		}
 
 		setPlaces(places => {
