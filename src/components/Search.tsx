@@ -27,12 +27,7 @@ export default function Search() {
 	if (!ctx) {
 		throw new Error('SearchContext must be used within SearchContext.Provider')
 	}
-	const {
-		latLon,
-		isLarge,
-		isSmall,
-		isOptionSelected,
-	} = ctx
+	const { latLon, isLarge, isSmall, isOptionSelected } = ctx
 
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
 
@@ -66,9 +61,9 @@ export default function Search() {
 			lang === 'uk' ? `${formatedData}&${latLon}` : formatedData
 
 		if (lang === 'en') {
-			navigate(`/weatherIn/${formatedData}`)
+			navigate(`/weatherIn/${formatedData}?homePage`)
 		} else {
-			navigate(`/weatherin/${latLon}&${formatedData}`)
+			navigate(`/weatherin/${latLon}&${formatedData}?homePage`)
 		}
 
 		setPlaces(places => {
@@ -88,7 +83,7 @@ export default function Search() {
 				}
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<SearchInput typeOfInput={'homePage'} />
+				<SearchInput typeOfInput={'weatherPage'} />
 
 				<div className='search'>
 					<StyledSubmitButton
