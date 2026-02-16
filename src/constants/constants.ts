@@ -47,6 +47,7 @@ export const snowConditions = [
 	'Patchy freezing drizzle nearby',
 	'Light freezing rain',
 	'Blowing snow',
+	'Light snow',
 	'Blizzard',
 	'Помірний або сильний дощ та ожеледиця',
 	'Невеликий дощ зі снігом',
@@ -57,6 +58,7 @@ export const snowConditions = [
 	'Сильний сніг',
 	'Ожеледиця',
 	'Низова хуртовина',
+	'Невеликий сніг',
 	'Місцями сніг',
 	'Місцями паморозь',
 ]
