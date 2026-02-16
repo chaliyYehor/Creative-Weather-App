@@ -83,7 +83,7 @@ export default function Search() {
 				}
 				onSubmit={handleSubmit(onSubmit)}
 			>
-				<SearchInput typeOfInput={'weatherPage'} />
+				<SearchInput typeOfInput={'homePage'} />
 
 				<div className='search'>
 					<StyledSubmitButton
