@@ -6,7 +6,6 @@ import type { Search } from '#types/form'
 import { useGetDataQuery } from '#store/services/autocompleteApi'
 import { useSelector } from 'react-redux'
 import type { RootType } from '#store/store'
-import { SearchIcon } from 'lucide-react'
 import { useContext } from 'react'
 import { SearchContext } from '#constants/searchContext'
 
@@ -70,6 +69,10 @@ const StyledAutocomplete = styled(Autocomplete<string, false, false, false>)<{
 				'& .MuiAutocomplete-clearIndicator:hover': {
 					backgroundColor: 'rgba(255,255,255,0.1)',
 				},
+
+				'& .MuiSvgIcon-root': {
+					color: '#fff'
+				}
 			}
 })
 
