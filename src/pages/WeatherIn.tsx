@@ -27,7 +27,6 @@ const WeatherIn = () => {
 	const [searchValue, setSearchValue] = useState('')
 
 	const ctx = useContext(SearchContext)
-
 	if (!ctx) {
 		throw new Error('SearchContext is not provided')
 	}
@@ -36,13 +35,14 @@ const WeatherIn = () => {
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const pageId = useParams()
-	let cityName = pageId.city && lang === 'en' ? pageId.city.split('&')[1] : pageId.city!.split('&')[1].split('$')[0]
-	const navigatedFrom =
-		pageId.city && (pageId.city.split('$')[1] as 'homePage' | 'weatherPage')
 
-	const { city } = useParams()
+	const pageData = pageId.city?.split('&')
+	const cityName = pageData?.[0]
+	const cityLatLon = pageData?.[1]
+	const navigatedFrom = pageData?.[2]
+
 	const { data, isFetched } = useQuery(
-		weatherQueryOptions(city as string, lang),
+		weatherQueryOptions(cityLatLon as string, lang),
 	)
 	const weather = data?.current?.condition.text
 	const localTime = data?.location?.localtime.split(' ')[1].split(':')[0]
@@ -76,16 +76,11 @@ const WeatherIn = () => {
 		if (!searchValue) return
 
 		const formatedData = searchValue.split(',')[0]
-		const formatedDataStorage =
-			lang === 'uk' ? `${formatedData}&${latLon}` : formatedData
+		const formatedDataStorage = `${formatedData}&${latLon}`
 
 		console.log(`formatted data for LS: ${formatedDataStorage}`)
 
-		if (lang === 'en') {
-			navigate(`/weatherIn/${formatedData}$weatherPage`)
-		} else {
-			navigate(`/weatherin/${latLon}&${formatedData}$weatherPage`)
-		}
+		navigate(`/weatherin/${formatedData}&${latLon}&weatherPage`)
 
 		setPlaces(places => {
 			return formatedDataStorage === places[places.length - 1]
