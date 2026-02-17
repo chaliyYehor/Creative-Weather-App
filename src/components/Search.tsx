@@ -64,7 +64,7 @@ export default function Search() {
 		setPlaces(places => {
 			return formatedDataStorage === places[places.length - 1]
 				? [...places]
-				: [...places, formatedDataStorage]
+				: [...places, `${formatedDataStorage}&${lang}`]
 		})
 
 		reset()

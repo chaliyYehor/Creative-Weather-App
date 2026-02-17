@@ -31,11 +31,10 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 		await new Promise(res => setTimeout(res, 1500))
 
 		const latLon = place.includes('&') && place.split('&')[1]
-		const properUrl = place.includes('&')
-			? `${place.split('&')[0]}&${latLon}`
-			: place
+		const languageUsed = place.split('&')[2]
+		const properUrl = `${place.split('&')[0]}&${latLon}`
 
-		navigate(`/weatherIn/${properUrl}&homePage`)
+		navigate(`/weatherIn/${properUrl}&homePage&${languageUsed}`)
 	}
 
 	const { data } = useQuery(weatherQueryOptions(city as string, lang))
