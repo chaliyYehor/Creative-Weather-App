@@ -103,7 +103,7 @@ const WeatherIn = () => {
 
 			<div
 				style={{
-					backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+					backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
     url(${url})`,
 				}}
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
@@ -155,20 +155,20 @@ const WeatherIn = () => {
 				</div>
 
 				<div className='moreInfoWrapper flex flex-col items-center absolute bottom-0 left-0 w-full h-[60vh] overflow-x-auto'>
-					<div className='content flex flex-col items-center text-[14px] text-white w-[80%]'>
-						<h4>Weather Details...</h4>
-						<h3 className='uppercase text-center'>
+					<div className='content mt-13.75 flex flex-col items-center text-[14px] text-white w-[80%]'>
+						<h4 className='mb-9.25'>Weather Details...</h4>
+						<h3 className='uppercase mb-7.5 text-center'>
 							Thunderstorm with a little drizzle
 						</h3>
 
-						<div className='current w-full border-b-2 border-white'>
+						<div className='current pb-19.5 flex flex-col gap-7.5 w-full border-b-2 border-white'>
 							<div className='tempMin flex justify-between'>
 								<div>
 									<p>Temp max</p>
 								</div>
 								<div className='infoWrapper'>
 									<p>19°</p>
-									<ThermometerSun />
+									<ThermometerSun color='#DFA1A1' />
 								</div>
 							</div>
 							<div className='tempMax'>
@@ -178,7 +178,7 @@ const WeatherIn = () => {
 
 								<div className='infoWrapper'>
 									<p>15°</p>
-									<ThermometerSnowflake />
+									<ThermometerSnowflake color='#6D97CA' />
 								</div>
 							</div>
 
