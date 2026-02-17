@@ -51,7 +51,7 @@ const MaterialUISwitch = styled(Switch)(() => ({
 		color: '#fff',
 
 		'&::before': {
-			content: '"UK"',
+			content: '"УКР"',
 		},
 	},
 
