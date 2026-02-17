@@ -40,9 +40,10 @@ const WeatherIn = () => {
 	const cityName = pageData?.[0]
 	const cityLatLon = pageData?.[1]
 	const navigatedFrom = pageData?.[2]
+	const languageUsed = pageData?.[3] ?? lang
 
 	const { data, isFetched } = useQuery(
-		weatherQueryOptions(cityLatLon as string, lang),
+		weatherQueryOptions(cityLatLon as string, languageUsed as 'uk' | 'en'),
 	)
 	const weather = data?.current?.condition.text
 	const localTime = data?.location?.localtime.split(' ')[1].split(':')[0]
@@ -52,7 +53,7 @@ const WeatherIn = () => {
 	console.log(weather)
 
 	const formatted = dayjs(data?.location.localtime)
-		.locale(lang === 'en' ? 'en' : 'uk')
+		.locale(languageUsed === 'en' ? 'en' : 'uk')
 		.format('HH:mm - dddd, D MMM YY')
 
 	useEffect(() => {
@@ -85,7 +86,7 @@ const WeatherIn = () => {
 		setPlaces(places => {
 			return formatedDataStorage === places[places.length - 1]
 				? [...places]
-				: [...places, formatedDataStorage]
+				: [...places, `${formatedDataStorage}&${lang}`]
 		})
 	}
 
@@ -95,7 +96,8 @@ const WeatherIn = () => {
 
 			<div
 				style={{
-					backgroundImage: `url(${url})`,
+					backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+    url(${url})`,
 				}}
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
 			>
