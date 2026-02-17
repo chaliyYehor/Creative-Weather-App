@@ -11,7 +11,14 @@ import type { RootType } from '#store/store'
 import dayjs from 'dayjs'
 import 'dayjs/locale/uk'
 import SearchInput from '#components/SearchInput'
-import { SearchIcon } from 'lucide-react'
+import {
+	Cloud,
+	Droplet,
+	SearchIcon,
+	ThermometerSnowflake,
+	ThermometerSun,
+	Wind,
+} from 'lucide-react'
 import { SearchContext } from '#constants/searchContext'
 import { useFormContext } from 'react-hook-form'
 import type { Search } from '#types/form'
@@ -147,7 +154,67 @@ const WeatherIn = () => {
 					</div>
 				</div>
 
-				<div className='moreInfoWrapper absolute bottom-0 left-0 w-full h-[60vh] '></div>
+				<div className='moreInfoWrapper flex flex-col items-center absolute bottom-0 left-0 w-full h-[60vh] overflow-x-auto'>
+					<div className='content flex flex-col items-center text-[14px] text-white w-[80%]'>
+						<h4>Weather Details...</h4>
+						<h3 className='uppercase text-center'>
+							Thunderstorm with a little drizzle
+						</h3>
+
+						<div className='current w-full border-b-2 border-white'>
+							<div className='tempMin flex justify-between'>
+								<div>
+									<p>Temp max</p>
+								</div>
+								<div className='infoWrapper'>
+									<p>19°</p>
+									<ThermometerSun />
+								</div>
+							</div>
+							<div className='tempMax'>
+								<div>
+									<p>Temp min</p>
+								</div>
+
+								<div className='infoWrapper'>
+									<p>15°</p>
+									<ThermometerSnowflake />
+								</div>
+							</div>
+
+							<div className='humidity'>
+								<div>
+									<p>Humidity</p>
+								</div>
+
+								<div className='infoWrapper'>
+									<p>58%</p>
+									<Droplet />
+								</div>
+							</div>
+							<div className='Cloudy'>
+								<div>
+									<p>Cloudy</p>
+								</div>
+
+								<div className='infoWrapper'>
+									<p>86%</p>
+									<Cloud />
+								</div>
+							</div>
+							<div className='Wind'>
+								<div>
+									<p>Wind</p>
+								</div>
+
+								<div className='infoWrapper'>
+									<p>5km/h</p>
+									<Wind />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	)

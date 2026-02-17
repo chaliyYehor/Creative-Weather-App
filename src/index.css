@@ -112,6 +112,8 @@ body {
 	background-color: rgba(255, 255, 255, 0.04);
 
 	border-top: 5px solid rgba(255, 255, 255, 0.161);
+
+	scrollbar-width: none;
 }
 
 .mainInfoWrapper {
@@ -144,9 +146,18 @@ body {
 }
 
 .cardWrapper:hover {
-	background-color: rgba(255, 255, 255, 0.09);	
+	background-color: rgba(255, 255, 255, 0.09);
 }
 
 .cardWrapper:active {
-	background-color: rgba(255, 255, 255, 0.13);	
+	background-color: rgba(255, 255, 255, 0.13);
+}
+
+.current div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.infoWrapper {
+	display: flex;
 }
