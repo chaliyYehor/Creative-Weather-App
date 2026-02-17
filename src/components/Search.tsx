@@ -9,6 +9,8 @@ import { useContext } from 'react'
 import { useFormContext, type SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import SearchInput from './SearchInput'
+import { useSelector } from 'react-redux'
+import type { RootType } from '#store/store'
 
 const StyledSubmitButton = styled(Button)(() => ({
 	'&.Mui-disabled': {
@@ -20,6 +22,8 @@ const StyledSubmitButton = styled(Button)(() => ({
 }))
 
 export default function Search() {
+	const lang = useSelector((state: RootType) => state.langSlice.lang)
+
 	const ctx = useContext(SearchContext)
 
 	if (!ctx) {
