@@ -1,5 +1,4 @@
 import { SearchContext } from '#constants/searchContext'
-import type { RootType } from '#store/store'
 import type { Search } from '#types/form'
 import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
@@ -8,7 +7,6 @@ import gsap from 'gsap'
 import { Search as SearchIcon } from 'lucide-react'
 import { useContext } from 'react'
 import { useFormContext, type SubmitHandler } from 'react-hook-form'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import SearchInput from './SearchInput'
 
@@ -30,8 +28,6 @@ export default function Search() {
 	const { latLon, isLarge, isSmall, isOptionSelected } = ctx
 
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
-
-	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const navigate = useNavigate()
 
@@ -57,14 +53,9 @@ export default function Search() {
 		await new Promise(res => setTimeout(res, 1500))
 
 		const formatedData = data.search.split(',')[0]
-		const formatedDataStorage =
-			lang === 'uk' ? `${formatedData}&${latLon}` : formatedData
+		const formatedDataStorage = `${formatedData}&${latLon}`
 
-		if (lang === 'en') {
-			navigate(`/weatherIn/${formatedData}$homePage`)
-		} else {
-			navigate(`/weatherin/${latLon}&${formatedData}$homePage`)
-		}
+		navigate(`/weatherin/${formatedData}&${latLon}&homePage`)
 
 		setPlaces(places => {
 			return formatedDataStorage === places[places.length - 1]

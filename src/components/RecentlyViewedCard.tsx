@@ -32,10 +32,10 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 
 		const latLon = place.includes('&') && place.split('&')[1]
 		const properUrl = place.includes('&')
-			? `${latLon}&${place.split('&')[0]}`
+			? `${place.split('&')[0]}&${latLon}`
 			: place
 
-		navigate(`/weatherIn/${properUrl}$homePage`)
+		navigate(`/weatherIn/${properUrl}&homePage`)
 	}
 
 	const { data } = useQuery(weatherQueryOptions(city as string, lang))
