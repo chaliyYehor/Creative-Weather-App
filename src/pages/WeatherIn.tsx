@@ -265,7 +265,7 @@ const WeatherIn = () => {
 								} else if (localTime && idx === +localTime) {
 									time = languageUsed === 'en' ? 'Now' : 'Зараз'
 								} else {
-									time = idx
+									time = idx.toString()
 								}
 
 								return (
@@ -273,11 +273,11 @@ const WeatherIn = () => {
 										className='w-20 shrink-0 flex flex-col justify-center items-center gap-2'
 										key={idx}
 									>
-										<p className='font-bold text-xl'>
-											{time}
-										</p>
+										<p className='font-bold text-xl'>{time}</p>
 										<img src={hourData.condition.icon} alt='weather type' />
-										<p className='font-bold text-xl'>{hourData.temp_c}</p>
+										<p className='font-bold text-xl'>
+											{hourData && Math.round(hourData.temp_c)}°
+										</p>
 									</div>
 								)
 							})}
