@@ -171,7 +171,7 @@ function SearchInput({ typeOfInput, setNeededValue }: SearchInputProp) {
 						<TextField
 							{...params}
 							variant={typeOfInput === 'weatherPage' ? 'standard' : 'outlined'}
-							placeholder='Weather in...'
+							placeholder={lang === 'en' ? 'Weather in...' : 'Погода у...'}
 						/>
 					)}
 				/>
