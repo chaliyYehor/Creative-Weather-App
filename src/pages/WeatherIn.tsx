@@ -154,7 +154,11 @@ const WeatherIn = () => {
 
 				<div className='moreInfoWrapper flex flex-col items-center absolute bottom-0 left-0 w-full h-[60vh] overflow-x-auto'>
 					<div className='content mt-13.75 flex flex-col items-center text-[14px] text-white w-[80%]'>
-						<h4 className='mb-9.25'>{languageUsed === 'en' ? 'Weather Details...' : 'Деталі про погоду...'}</h4>
+						<h4 className='mb-9.25'>
+							{languageUsed === 'en'
+								? 'Weather Details...'
+								: 'Деталі про погоду...'}
+						</h4>
 						<h3 className='uppercase mb-7.5 text-center'>
 							{data?.forecast.forecastday[0].day.condition.text}
 						</h3>
@@ -222,6 +226,22 @@ const WeatherIn = () => {
 									<Wind />
 								</div>
 							</div>
+						</div>
+
+						<h4 className='mb-14 mt-10.25'>
+							{languageUsed === 'en'
+								? "Today's Weather Forecast......"
+								: 'Сьогоднішній прогноз погоди...'}
+						</h4>
+
+						<div className='todaysForecast'>
+							{data?.forecast.forecastday[0].hour.map((hourData, idx) => (
+								<div key={idx}>
+									<p>{idx <= 9 ? `0${idx}` : idx}</p>
+									<img src={hourData.condition.icon} alt='weather type' />
+									<p>{hourData.temp_c}</p>
+								</div>
+							))}
 						</div>
 					</div>
 				</div>
