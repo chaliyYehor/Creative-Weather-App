@@ -57,8 +57,6 @@ const WeatherIn = () => {
 
 	const url = findWeatherCondition(weather, localTime)
 
-	console.log(weather)
-
 	const formatted = dayjs(data?.location.localtime)
 		.locale(languageUsed === 'en' ? 'en' : 'uk')
 		.format('HH:mm - dddd, D MMM YY')
@@ -156,59 +154,71 @@ const WeatherIn = () => {
 
 				<div className='moreInfoWrapper flex flex-col items-center absolute bottom-0 left-0 w-full h-[60vh] overflow-x-auto'>
 					<div className='content mt-13.75 flex flex-col items-center text-[14px] text-white w-[80%]'>
-						<h4 className='mb-9.25'>Weather Details...</h4>
+						<h4 className='mb-9.25'>{languageUsed === 'en' ? 'Weather Details...' : 'Деталі про погоду...'}</h4>
 						<h3 className='uppercase mb-7.5 text-center'>
-							Thunderstorm with a little drizzle
+							{data?.forecast.forecastday[0].day.condition.text}
 						</h3>
 
 						<div className='current pb-19.5 flex flex-col gap-7.5 w-full border-b-2 border-white'>
 							<div className='tempMin flex justify-between'>
 								<div>
-									<p>Temp max</p>
+									<p>{languageUsed === 'en' ? 'Temp max' : 'Макс темп'}</p>
 								</div>
 								<div className='infoWrapper'>
-									<p>19°</p>
+									<p>
+										{data?.forecast &&
+											Math.round(data?.forecast.forecastday[0].day.maxtemp_c)}
+										°
+									</p>
 									<ThermometerSun color='#DFA1A1' />
 								</div>
 							</div>
 							<div className='tempMax'>
 								<div>
-									<p>Temp min</p>
+									<p>{languageUsed === 'en' ? 'Temp min' : 'Мін темп'}</p>
 								</div>
 
 								<div className='infoWrapper'>
-									<p>15°</p>
+									<p>
+										{data?.forecast &&
+											Math.round(data?.forecast.forecastday[0].day.mintemp_c)}
+										°
+									</p>
 									<ThermometerSnowflake color='#6D97CA' />
 								</div>
 							</div>
 
 							<div className='humidity'>
 								<div>
-									<p>Humidity</p>
+									<p>{languageUsed === 'en' ? 'Humidity' : 'Вологість'}</p>
 								</div>
 
 								<div className='infoWrapper'>
-									<p>58%</p>
+									<p>{data?.forecast.forecastday[0].day.avghumidity}%</p>
 									<Droplet />
 								</div>
 							</div>
 							<div className='Cloudy'>
 								<div>
-									<p>Cloudy</p>
+									<p className='capitalize'>
+										{languageUsed === 'en' ? 'Cloudy' : 'хмарність'}
+									</p>
 								</div>
 
 								<div className='infoWrapper'>
-									<p>86%</p>
+									<p>{localTime && data?.current.cloud}%</p>
 									<Cloud />
 								</div>
 							</div>
 							<div className='Wind'>
 								<div>
-									<p>Wind</p>
+									<p>{languageUsed === 'en' ? 'Wind' : 'Вітер'}</p>
 								</div>
 
 								<div className='infoWrapper'>
-									<p>5km/h</p>
+									<p>
+										{data?.current && Math.round(data?.current.wind_kph)}km/h
+									</p>
 									<Wind />
 								</div>
 							</div>

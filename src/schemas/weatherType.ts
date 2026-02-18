@@ -8,10 +8,12 @@ export interface ForecastResponse {
 	}
 	current: {
 		temp_c: number
+		cloud: number
+		wind_kph: number
 		condition: {
 			text: string
 			icon: string
-		},
+		}
 		is_day: '1' | '0'
 	}
 	forecast: {
@@ -28,6 +30,7 @@ export interface ForecastDay {
 			text: string
 			icon: string
 		}
+		avghumidity: number
 	}
 	hour: Hour[]
 }
@@ -35,6 +38,7 @@ export interface ForecastDay {
 export interface Hour {
 	time: string
 	temp_c: number
+	cloud: number
 	condition: {
 		text: string
 		icon: string
