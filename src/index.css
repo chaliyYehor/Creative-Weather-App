@@ -177,4 +177,10 @@ body {
 
 .todaysForecast {
 	scrollbar-width: none;
+
+	scroll-behavior: smooth;
+}
+
+.todaysForecast::-webkit-scrollbar {
+	display: none;
 }

@@ -5,7 +5,7 @@ import FadeOut from '#components/FadeOut'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { findWeatherCondition } from '#utils/findWeatherCondition'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import type { AppDispatch, RootType } from '#store/store'
 import dayjs from 'dayjs'
@@ -104,6 +104,16 @@ const WeatherIn = () => {
 				? [...places]
 				: [...places, `${formatedDataStorage}&${lang}`]
 		})
+	}
+
+	const containerRef = useRef<HTMLDivElement>(null)
+
+	const handleWheel = (e: React.WheelEvent) => {
+		if (!containerRef.current) return
+
+		e.preventDefault()
+
+		containerRef.current.scrollLeft += e.deltaY
 	}
 
 	return (
@@ -263,7 +273,11 @@ const WeatherIn = () => {
 								: 'Сьогоднішній прогноз погоди...'}
 						</h4>
 
-						<section className='todaysForecast w-full flex overflow-auto mb-10'>
+						<section
+							ref={containerRef}
+							onWheel={handleWheel}
+							className='todaysForecast w-full flex overflow-auto mb-10'
+						>
 							{data?.forecast.forecastday[0].hour.map((hourData, idx) => {
 								let time = ''
 								if (idx <= 9) {
