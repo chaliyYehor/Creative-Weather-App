@@ -114,6 +114,11 @@ body {
 	border-top: 5px solid rgba(255, 255, 255, 0.161);
 
 	scrollbar-width: none;
+
+	font-family: 'Roboto', sans-serif;
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-variation-settings: 'wdth' 100;
 }
 
 .mainInfoWrapper {
@@ -156,16 +161,11 @@ body {
 .current div {
 	display: flex;
 	justify-content: space-between;
-
-	font-family: 'Roboto', sans-serif;
-	font-optical-sizing: auto;
-	font-style: normal;
-	font-variation-settings: 'wdth' 100;
 }
 
 .current div > p {
 	color: #ffffffc4;
-	
+
 	font-weight: 300;
 }
 
@@ -173,4 +173,8 @@ body {
 	display: flex;
 
 	gap: 21px;
+}
+
+.todaysForecast {
+	scrollbar-width: none;
 }

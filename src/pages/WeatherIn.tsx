@@ -230,16 +230,19 @@ const WeatherIn = () => {
 
 						<h4 className='mb-14 mt-10.25'>
 							{languageUsed === 'en'
-								? "Today's Weather Forecast......"
+								? "Today's Weather Forecast..."
 								: 'Сьогоднішній прогноз погоди...'}
 						</h4>
 
-						<section className='todaysForecast'>
+						<section className='todaysForecast w-full flex overflow-auto mb-10'>
 							{data?.forecast.forecastday[0].hour.map((hourData, idx) => (
-								<div key={idx}>
-									<p>{idx <= 9 ? `0${idx}` : idx}</p>
+								<div
+									className='w-20 shrink-0 flex flex-col justify-center items-center gap-2'
+									key={idx}
+								>
+									<p className='font-bold text-xl'>{idx <= 9 ? `0${idx}` : idx}</p>
 									<img src={hourData.condition.icon} alt='weather type' />
-									<p>{hourData.temp_c}</p>
+									<p className='font-bold text-xl'>{hourData.temp_c}</p>
 								</div>
 							))}
 						</section>
