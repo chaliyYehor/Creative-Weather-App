@@ -139,17 +139,17 @@ const WeatherIn = () => {
 					</div>
 				</nav>
 
-				<div className='mainInfoWrapper absolute left-5 top-[25vh] flex items-center gap-2.5'>
-					<div className='temp text-[48px]'>
+				<div className='mainInfoWrapper absolute left-5 top-[25vh] sm:top-[15vh] flex items-center gap-2.5'>
+					<div className='temp text-[48px] sm:text-[110px]'>
 						{data && Math.round(data?.current.temp_c)}°
 					</div>
 					<div className='generalInfo flex flex-col gap-1'>
-						<h3 className='text-[20px]'>
+						<h3 className='text-[20px] sm:text-[48px]'>
 							{cityName ? cityName : data?.location.name}
 						</h3>
-						<p className='text-[10px] -mt-2.5'>{formatted}</p>
+						<p className='text-[10px] sm:text-[16px] -mt-2.5'>{formatted}</p>
 					</div>
-					<div className='typeOfWeather w-10 h-10'>
+					<div className='typeOfWeather w-10 h-10 sm:w-20 sm:h-20'>
 						<img
 							className='w-full h-full'
 							src={data?.current.condition.icon}
@@ -159,17 +159,17 @@ const WeatherIn = () => {
 				</div>
 
 				<div className='moreInfoWrapper flex flex-col items-center absolute bottom-0 left-0 w-full h-[60vh] overflow-x-auto'>
-					<div className='content mt-13.75 flex flex-col items-center text-[14px] text-white w-[80%]'>
-						<h4 className='mb-9.25'>
+					<div className='content mt-13.75 flex flex-col items-center text-[14px] text-white w-[80%] sm:max-w-97.5'>
+						<h4 className='mb-9.25 sm:text-[18px]'>
 							{languageUsed === 'en'
 								? 'Weather Details...'
 								: 'Деталі про погоду...'}
 						</h4>
-						<h3 className='uppercase mb-7.5 text-center'>
+						<h3 className='uppercase mb-7.5 text-center sm:text-[18px]'>
 							{data?.forecast.forecastday[0].day.condition.text}
 						</h3>
 
-						<section className='current pb-19.5 flex flex-col gap-7.5 w-full border-b-2 border-white'>
+						<section className='current sm:text-[18px] pb-19.5 flex flex-col gap-7.5 w-full border-b-2 border-white'>
 							<div className='tempMin flex justify-between'>
 								<div>
 									<p>{languageUsed === 'en' ? 'Temp max' : 'Макс темп'}</p>
@@ -234,7 +234,7 @@ const WeatherIn = () => {
 							</div>
 						</section>
 
-						<h4 className='mb-14 mt-10.25'>
+						<h4 className='mb-14 mt-10.25 sm:text-[18px] font-normal'>
 							{languageUsed === 'en'
 								? "Today's Weather Forecast..."
 								: 'Сьогоднішній прогноз погоди...'}
