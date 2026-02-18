@@ -6,8 +6,8 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { findWeatherCondition } from '#utils/findWeatherCondition'
 import { useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import type { RootType } from '#store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch, RootType } from '#store/store'
 import dayjs from 'dayjs'
 import 'dayjs/locale/uk'
 import SearchInput from '#components/SearchInput'
@@ -23,6 +23,7 @@ import { SearchContext } from '#constants/searchContext'
 import { useFormContext } from 'react-hook-form'
 import type { Search } from '#types/form'
 import { useLocalStorage } from '@uidotdev/usehooks'
+import { changeLang } from '#store/slices/languageSlice'
 
 const WeatherIn = () => {
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
@@ -39,6 +40,7 @@ const WeatherIn = () => {
 	}
 	const { isOptionSelected, latLon } = ctx
 
+	const dispatch = useDispatch<AppDispatch>()
 	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	const pageId = useParams()
@@ -48,6 +50,10 @@ const WeatherIn = () => {
 	const cityLatLon = pageData?.[1]
 	const navigatedFrom = pageData?.[2]
 	const languageUsed = pageData?.[3] ?? lang
+
+	dispatch(changeLang(languageUsed as 'uk' | 'en'))
+
+	console.log(lang)
 
 	const { data, isFetched } = useQuery(
 		weatherQueryOptions(cityLatLon as string, languageUsed as 'uk' | 'en'),
