@@ -25,7 +25,6 @@ import type { Search } from '#types/form'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
 const WeatherIn = () => {
-
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
 
 	const { reset } = useFormContext<Search>()
@@ -112,7 +111,7 @@ const WeatherIn = () => {
 				}}
 				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
 			>
-				<div className='searchWrapper flex absolute right-5 top-4 z-10'>
+				<div className='searchWrapper lg:hidden flex absolute right-5 top-4 z-10'>
 					<SearchInput
 						setNeededValue={setSearchValue}
 						typeOfInput='weatherPage'
@@ -127,8 +126,8 @@ const WeatherIn = () => {
 					</button>
 				</div>
 
-				<nav className='w-full pl-5 pt-5 absolute'>
-					<div className='logo w-9.75 h-5 select-none'>
+				<nav className='w-full pl-5 pt-5 lg:pt-9.25 lg:pl-29.25 absolute'>
+					<div className='logo w-9.75 h-5 sm:w-12 sm:h-7 lg:w-22.5 lg:h-11.75 select-none'>
 						<Link to={'/'} onClick={() => reset()}>
 							<img
 								className='w-full h-full'
@@ -139,15 +138,17 @@ const WeatherIn = () => {
 					</div>
 				</nav>
 
-				<div className='mainInfoWrapper absolute left-5 top-[25vh] sm:top-[15vh] flex items-center gap-2.5'>
-					<div className='temp text-[48px] sm:text-[110px]'>
+				<div className='mainInfoWrapper absolute left-5 sm:left-8 lg:left-5 xl:left-29 top-[25vh] sm:top-[15vh] lg:top-[65vh] flex items-center gap-2.5 h-fit'>
+					<div className='temp text-[48px] sm:text-[110px] lg:text-[130px]'>
 						{data && Math.round(data?.current.temp_c)}°
 					</div>
 					<div className='generalInfo flex flex-col gap-1'>
-						<h3 className='text-[20px] sm:text-[48px]'>
+						<h3 className='text-[20px] sm:text-[48px] lg:text-[60px]'>
 							{cityName ? cityName : data?.location.name}
 						</h3>
-						<p className='text-[10px] sm:text-[16px] -mt-2.5'>{formatted}</p>
+						<p className='text-[10px] sm:text-[16px] lg:text-[18px] -mt-2.5'>
+							{formatted}
+						</p>
 					</div>
 					<div className='typeOfWeather w-10 h-10 sm:w-20 sm:h-20'>
 						<img
@@ -158,7 +159,22 @@ const WeatherIn = () => {
 					</div>
 				</div>
 
-				<div className='moreInfoWrapper flex flex-col items-center absolute bottom-0 left-0 w-full h-[60vh] overflow-x-auto'>
+				<div className='moreInfoWrapper lg:pt-10 flex flex-col items-center absolute bottom-0 lg:top-0 right-0 lg:right-0 w-full lg:w-[40vw] h-[60vh] lg:h-full overflow-x-auto'>
+					<div className='searchWrapper lg:flex lg:visible hidden z-10'>
+						<SearchInput
+							setNeededValue={setSearchValue}
+							typeOfInput='weatherPage'
+						/>
+
+						<button
+							className='cursor-pointer'
+							onClick={submit}
+							disabled={!isOptionSelected}
+						>
+							<SearchIcon color='white' />
+						</button>
+					</div>
+
 					<div className='content mt-13.75 flex flex-col items-center text-[14px] text-white w-[80%] sm:max-w-97.5'>
 						<h4 className='mb-9.25 sm:text-[18px]'>
 							{languageUsed === 'en'
@@ -262,4 +278,3 @@ const WeatherIn = () => {
 }
 
 export default WeatherIn
-
