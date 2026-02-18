@@ -71,6 +71,8 @@ export default function Search() {
 		reset()
 	}
 
+	const buttonText = lang === 'en' ? 'Search' : 'Пошук'
+
 	return (
 		<>
 			<form
@@ -89,7 +91,7 @@ export default function Search() {
 						startIcon={isLarge || isSmall ? <SearchIcon /> : ''}
 						type='submit'
 					>
-						{isLarge || isSmall ? 'Search' : <SearchIcon />}
+						{isLarge || isSmall ? buttonText : <SearchIcon />}
 					</StyledSubmitButton>
 				</div>
 			</form>
