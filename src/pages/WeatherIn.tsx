@@ -163,7 +163,7 @@ const WeatherIn = () => {
 							{data?.forecast.forecastday[0].day.condition.text}
 						</h3>
 
-						<div className='current pb-19.5 flex flex-col gap-7.5 w-full border-b-2 border-white'>
+						<section className='current pb-19.5 flex flex-col gap-7.5 w-full border-b-2 border-white'>
 							<div className='tempMin flex justify-between'>
 								<div>
 									<p>{languageUsed === 'en' ? 'Temp max' : 'Макс темп'}</p>
@@ -226,7 +226,7 @@ const WeatherIn = () => {
 									<Wind />
 								</div>
 							</div>
-						</div>
+						</section>
 
 						<h4 className='mb-14 mt-10.25'>
 							{languageUsed === 'en'
@@ -234,7 +234,7 @@ const WeatherIn = () => {
 								: 'Сьогоднішній прогноз погоди...'}
 						</h4>
 
-						<div className='todaysForecast'>
+						<section className='todaysForecast'>
 							{data?.forecast.forecastday[0].hour.map((hourData, idx) => (
 								<div key={idx}>
 									<p>{idx <= 9 ? `0${idx}` : idx}</p>
@@ -242,7 +242,7 @@ const WeatherIn = () => {
 									<p>{hourData.temp_c}</p>
 								</div>
 							))}
-						</div>
+						</section>
 					</div>
 				</div>
 			</div>
