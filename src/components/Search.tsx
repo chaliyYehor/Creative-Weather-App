@@ -45,6 +45,7 @@ export default function Search() {
 		;(document.activeElement as HTMLElement)?.blur()
 
 		gsap.to('.slicesWrapper div', {
+			xPercent: 0,
 			x: 0,
 			duration: 1,
 			pointerEvents: 'all',

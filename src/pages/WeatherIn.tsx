@@ -25,6 +25,7 @@ import type { Search } from '#types/form'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
 const WeatherIn = () => {
+
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
 
 	const { reset } = useFormContext<Search>()
@@ -67,14 +68,19 @@ const WeatherIn = () => {
 
 	useGSAP(() => {
 		if (isFetched && navigatedFrom === 'homePage') {
-			gsap.from('.slicesWrapper div', {
-				x: 0,
-				duration: 1,
-				pointerEvents: 'all',
-				stagger: 0.1,
-				delay: 0.5,
-				ease: 'power1.inOut',
-			})
+			gsap.fromTo(
+				'.slicesWrapper div',
+				{ xPercent: 0, x: 0, pointerEvents: 'all' },
+				{
+					xPercent: -100,
+					x: 0,
+					pointerEvents: 'none',
+					duration: 1,
+					stagger: 0.1,
+					delay: 0.5,
+					ease: 'power1.inOut',
+				},
+			)
 		}
 	}, [isFetched])
 
@@ -240,7 +246,9 @@ const WeatherIn = () => {
 									className='w-20 shrink-0 flex flex-col justify-center items-center gap-2'
 									key={idx}
 								>
-									<p className='font-bold text-xl'>{idx <= 9 ? `0${idx}` : idx}</p>
+									<p className='font-bold text-xl'>
+										{idx <= 9 ? `0${idx}` : idx}
+									</p>
 									<img src={hourData.condition.icon} alt='weather type' />
 									<p className='font-bold text-xl'>{hourData.temp_c}</p>
 								</div>
@@ -254,3 +262,4 @@ const WeatherIn = () => {
 }
 
 export default WeatherIn
+
