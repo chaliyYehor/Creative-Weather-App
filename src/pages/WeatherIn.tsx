@@ -243,7 +243,8 @@ const WeatherIn = () => {
 
 								<div className='infoWrapper'>
 									<p>
-										{data?.current && Math.round(data?.current.wind_kph)}km/h
+										{data?.current && Math.round(data?.current.wind_kph)}
+										{languageUsed === 'en' ? ' km/h' : ' км/год'}
 									</p>
 									<Wind />
 								</div>
@@ -257,18 +258,29 @@ const WeatherIn = () => {
 						</h4>
 
 						<section className='todaysForecast w-full flex overflow-auto mb-10'>
-							{data?.forecast.forecastday[0].hour.map((hourData, idx) => (
-								<div
-									className='w-20 shrink-0 flex flex-col justify-center items-center gap-2'
-									key={idx}
-								>
-									<p className='font-bold text-xl'>
-										{idx <= 9 ? `0${idx}` : idx}
-									</p>
-									<img src={hourData.condition.icon} alt='weather type' />
-									<p className='font-bold text-xl'>{hourData.temp_c}</p>
-								</div>
-							))}
+							{data?.forecast.forecastday[0].hour.map((hourData, idx) => {
+								let time = ''
+								if (idx <= 9) {
+									time = `0${idx}`
+								} else if (localTime && idx === +localTime) {
+									time = languageUsed === 'en' ? 'Now' : 'Зараз'
+								} else {
+									time = idx
+								}
+
+								return (
+									<div
+										className='w-20 shrink-0 flex flex-col justify-center items-center gap-2'
+										key={idx}
+									>
+										<p className='font-bold text-xl'>
+											{time}
+										</p>
+										<img src={hourData.condition.icon} alt='weather type' />
+										<p className='font-bold text-xl'>{hourData.temp_c}</p>
+									</div>
+								)
+							})}
 						</section>
 					</div>
 				</div>
