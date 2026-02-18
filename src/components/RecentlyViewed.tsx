@@ -1,17 +1,26 @@
 import { Trash } from 'lucide-react'
 import RecentlyViewedCard from './RecentlyViewedCard'
 import { useLocalStorage } from '@uidotdev/usehooks'
+import { useSelector } from 'react-redux'
+import type { RootType } from '#store/store'
 
 const RecentlyViewed = () => {
 	const [places, setPlaces] = useLocalStorage<string[]>('places', [])
-	console.log(places)
+
+	const lang = useSelector((state: RootType) => state.langSlice.lang)
 
 	return (
 		<>
 			<div className='recentlyViewedWrapper text-white max-w-100 px-5 flex flex-col items-center mt-5 sm:mt-10 md:mt-15 max-h-100 overflow-hidden gap-2 md:gap-5 relative'>
-				<h3 className='text-xl md:text-3xl'>Recently Viewed</h3>
+				<h3 className='text-xl md:text-3xl'>
+					{lang === 'en' ? 'Recently Viewed' : 'Переглянуті'}
+				</h3>
 
-				<div onClick={() => setPlaces([])} className="clearAll md:text-white/50 text-white hover:md:text-white transition w-fit h-fit absolute right-5 top-0 md:top-2 cursor-pointer" title='Clear all'>
+				<div
+					onClick={() => setPlaces([])}
+					className='clearAll md:text-white/50 text-white hover:md:text-white transition w-fit h-fit absolute right-5 top-0 md:top-2 cursor-pointer'
+					title='Clear all'
+				>
 					<Trash />
 				</div>
 
