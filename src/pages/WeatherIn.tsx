@@ -159,7 +159,7 @@ const WeatherIn = () => {
 					</div>
 				</div>
 
-				<div className='moreInfoWrapper lg:pt-10 flex flex-col items-center absolute bottom-0 lg:top-0 right-0 lg:right-0 w-full lg:w-[40vw] h-[60vh] lg:h-full overflow-x-auto'>
+				<div className='moreInfoWrapper lg:pt-10 flex flex-col items-center absolute bottom-0 lg:top-0 right-0 lg:right-0 w-full lg:w-[40vw] h-[60vh] lg:h-full overflow-x-auto border-t-5 lg:border-t-0 lg:border-l-5 border-white/15'>
 					<div className='searchWrapper lg:flex lg:visible hidden z-10'>
 						<SearchInput
 							setNeededValue={setSearchValue}
