@@ -71,10 +71,11 @@ const WeatherIn = () => {
 		console.log(data)
 	}, [data])
 
-	useGSAP(() => {
-		if (isFetched && navigatedFrom === 'homePage') {
-			const tl = gsap.timeline()
+	const tl = useRef<gsap.core.Timeline>(null)
 
+	useGSAP(() => {
+		tl.current = gsap.timeline()
+		if (isFetched && navigatedFrom === 'homePage') {
 			gsap.fromTo(
 				'.slicesWrapper div',
 				{ xPercent: 0, x: 0, pointerEvents: 'all' },
@@ -88,12 +89,13 @@ const WeatherIn = () => {
 					ease: 'power1.inOut',
 				},
 			)
-			tl.from('.backgroundImage', {
-				opacity: 0,
-				duration: 0.7,
-				delay: 1.75,
-				ease: 'power1.inOut',
-			})
+			tl.current
+				.from('.backgroundImage', {
+					opacity: 0,
+					duration: 0.7,
+					delay: 1.75,
+					ease: 'power1.inOut',
+				})
 				.from(
 					'.logo',
 					{
@@ -158,13 +160,23 @@ const WeatherIn = () => {
 		}
 	}, [isFetched])
 
-	function submit() {
+	async function submit() {
+		;(document.activeElement as HTMLElement)?.blur()
+
 		if (!searchValue) return
 
 		const formatedData = searchValue.split(',')[0]
 		const formatedDataStorage = `${formatedData}&${latLon}`
 
-		console.log(`formatted data for LS: ${formatedDataStorage}`)
+		gsap.to('.transitionElement', {
+			autoAlpha: 1,
+			delay: 0.2,
+			duration: 0.5,
+			ease: 'power1.inOut',
+		})
+
+		//sleepTimeForTheAnimation
+		await new Promise(res => setTimeout(res, 3000))
 
 		navigate(`/weatherin/${formatedData}&${latLon}&weatherPage`)
 
@@ -188,6 +200,8 @@ const WeatherIn = () => {
 	return (
 		<>
 			<FadeOut />
+
+			<div className='transitionElement w-screen h-screen absolute top-0 left-0 z-100 opacity-0 invisible'></div>
 
 			<div className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'>
 				<div

@@ -184,3 +184,8 @@ body {
 	background-size: cover;
 	background-position: 50% 50%;
 }
+
+
+.transitionElement {
+	backdrop-filter: blur(10px);
+}
