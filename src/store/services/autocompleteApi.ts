@@ -21,7 +21,7 @@ export const autocompleteApi = createApi({
 					type: 'city',
 					limit: 5,
 					format: 'json',
-					apiKey: API_KEY,
+					apiKey: '6e49b703b6bc4e839e273409455d1c71',
 				},
 			}),
 		}),

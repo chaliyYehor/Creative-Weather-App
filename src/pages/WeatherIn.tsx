@@ -36,12 +36,6 @@ const WeatherIn = () => {
 	const cityLatLon = pageData?.[1]
 	const navigatedFrom = pageData?.[2]
 
-	// gsap.set('.slicesWrapper div', {
-	// 	xPercent: 0,
-	// 	x: 0,
-	// 	pointerEvents: 'all',
-	// })
-
 	useEffect(() => {
 		dispatch(changeLang(languageUsed as 'uk' | 'en'))
 	}, [languageUsed])
