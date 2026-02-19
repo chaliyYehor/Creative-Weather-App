@@ -60,7 +60,7 @@ export default function Search() {
 		const formatedData = data.search.split(',')[0]
 		const formatedDataStorage = `${formatedData}&${latLon}`
 
-		navigate(`/weatherin/${formatedData}&${latLon}&homePage`)
+		navigate(`/weatherin/${formatedData}&${latLon}&homePage&${lang}`)
 
 		setPlaces(places => {
 			return formatedDataStorage === places[places.length - 1]
