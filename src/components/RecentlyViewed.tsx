@@ -12,7 +12,7 @@ const RecentlyViewed = () => {
 	return (
 		<>
 			<div className='recentlyViewedWrapper text-white max-w-100 px-5 flex flex-col items-center mt-5 sm:mt-10 md:mt-15 max-h-100 overflow-hidden gap-2 md:gap-5 relative'>
-				<h3 className='text-xl md:text-3xl'>
+				<h3 className='recentlyViewedText text-xl md:text-3xl'>
 					{lang === 'en' ? 'Recently Viewed' : 'Переглянуті'}
 				</h3>
 

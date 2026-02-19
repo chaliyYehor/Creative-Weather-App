@@ -87,7 +87,7 @@ export default function Main() {
 				'+0.5',
 			)
 				.from(
-					'.chooseCity',
+					'.searchForm',
 					{
 						opacity: 0,
 						duration: 1.5,
@@ -129,11 +129,39 @@ export default function Main() {
 					'<0.5',
 				)
 				.from(
-					'.chooseCity',
+					'.searchForm',
 					{
 						y: 40,
 						opacity: 0,
 						duration: 1.5,
+						ease: 'power1.out',
+					},
+					'<0.5',
+				)
+				.from(
+					'.recentlyViewedWrapper',
+					{
+						opacity: 0,
+						duration: 1,
+						ease: 'power1.inOut',
+					},
+					'<0.5',
+				)
+				.from(
+					'.recentlyViewedText',
+					{
+						y: 40,
+						opacity: 0,
+						duration: 1,
+						ease: 'power1.inOut',
+					},
+					'<',
+				)
+				.from(
+					'.listWrapper',
+					{
+						opacity: 0,
+						duration: 1,
 						ease: 'power1.out',
 					},
 					'<0.5',
