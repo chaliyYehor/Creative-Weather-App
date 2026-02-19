@@ -55,7 +55,7 @@ const WeatherIn = () => {
 
 	console.log(lang)
 
-	const { data, isFetched } = useQuery(
+	const { data } = useQuery(
 		weatherQueryOptions(cityLatLon as string, languageUsed as 'uk' | 'en'),
 	)
 	const weather = data?.current?.condition.text
