@@ -54,8 +54,6 @@ const WeatherIn = () => {
 	}
 	const { isOptionSelected, latLon } = ctx
 
-	console.log(lang)
-
 	const { data } = useQuery(
 		weatherQueryOptions(cityLatLon as string, languageUsed as 'uk' | 'en'),
 	)
@@ -67,10 +65,6 @@ const WeatherIn = () => {
 	const formatted = dayjs(data?.location.localtime)
 		.locale(languageUsed === 'en' ? 'en' : 'uk')
 		.format('HH:mm - dddd, D MMM YY')
-
-	useEffect(() => {
-		console.log(data)
-	}, [data])
 
 	const tl = useRef<gsap.core.Timeline>(null)
 
