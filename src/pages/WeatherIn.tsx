@@ -75,7 +75,7 @@ const WeatherIn = () => {
 
 	useGSAP(() => {
 		tl.current = gsap.timeline()
-		if (isFetched && navigatedFrom === 'homePage') {
+		if (navigatedFrom === 'homePage') {
 			gsap.fromTo(
 				'.slicesWrapper div',
 				{ xPercent: 0, x: 0, pointerEvents: 'all' },
@@ -89,76 +89,85 @@ const WeatherIn = () => {
 					ease: 'power1.inOut',
 				},
 			)
-			tl.current
-				.from('.backgroundImage', {
+		}
+
+		if (navigatedFrom === 'weatherPage') {
+			gsap.to('.transitionElement', {
+				autoAlpha: 0,
+				duration: 5,
+				ease: 'power1.inOut',
+			})
+		}
+
+		tl.current
+			.from('.backgroundImage', {
+				opacity: 0,
+				duration: 0.7,
+				delay: 1,
+				ease: 'power1.inOut',
+			})
+			.from(
+				'.logo',
+				{
 					opacity: 0,
-					duration: 0.7,
-					delay: 1.75,
+					y: -30,
+					duration: 1,
 					ease: 'power1.inOut',
-				})
-				.from(
-					'.logo',
-					{
-						opacity: 0,
-						y: -30,
-						duration: 1,
-						ease: 'power1.inOut',
-					},
-					'<0.5',
-				)
-				.from(
-					'.searchWrapper',
-					{
-						opacity: 0,
-						y: -30,
-						duration: 0.7,
-						ease: 'power1.inOut',
-					},
-					'<0.5',
-				)
-				.from(
-					'.mainInfoWrapper div',
-					{
-						x: 30,
-						opacity: 0,
-						duration: 0.8,
-						ease: 'power1.inOut',
-						stagger: 0.2,
-					},
-					'<0.5',
-				)
-				.from(
-					'.content h4, .content h3',
-					{
-						opacity: 0,
-						duration: 0.5,
-						ease: 'power1.out',
-						stagger: 0.2,
-					},
-					'<0.5',
-				)
-				.from('.current', { opacity: 0 }, '<')
-				.from(
-					'.current div',
-					{
-						y: -30,
-						opacity: 0,
-						duration: 0.7,
-						ease: 'power1.inOut',
-						stagger: 0.05,
-						borderColor: 'transparent',
-					},
-					'<',
-				)
-				.from('.todaysForecast div', {
+				},
+				'<0.5',
+			)
+			.from(
+				'.searchWrapper',
+				{
+					opacity: 0,
+					y: -30,
+					duration: 0.7,
+					ease: 'power1.inOut',
+				},
+				'<0.5',
+			)
+			.from(
+				'.mainInfoWrapper div',
+				{
 					x: 30,
 					opacity: 0,
+					duration: 0.8,
 					ease: 'power1.inOut',
+					stagger: 0.2,
+				},
+				'<0.5',
+			)
+			.from(
+				'.content h4, .content h3',
+				{
+					opacity: 0,
 					duration: 0.5,
-					stagger: 0.1,
-				})
-		}
-	}, [isFetched])
+					ease: 'power1.out',
+					stagger: 0.2,
+				},
+				'<0.5',
+			)
+			.from('.current', { opacity: 0 }, '<')
+			.from(
+				'.current div',
+				{
+					y: -30,
+					opacity: 0,
+					duration: 0.7,
+					ease: 'power1.inOut',
+					stagger: 0.05,
+					borderColor: 'transparent',
+				},
+				'<',
+			)
+			.from('.todaysForecast div', {
+				x: 30,
+				opacity: 0,
+				ease: 'power1.inOut',
+				duration: 0.5,
+				stagger: 0.1,
+			})
+	}, [navigatedFrom, cityLatLon])
 
 	async function submit() {
 		;(document.activeElement as HTMLElement)?.blur()
@@ -176,7 +185,7 @@ const WeatherIn = () => {
 		})
 
 		//sleepTimeForTheAnimation
-		await new Promise(res => setTimeout(res, 3000))
+		await new Promise(res => setTimeout(res, 1500))
 
 		navigate(`/weatherin/${formatedData}&${latLon}&weatherPage`)
 
@@ -192,8 +201,6 @@ const WeatherIn = () => {
 	const handleWheel = (e: React.WheelEvent) => {
 		if (!containerRef.current) return
 
-		e.preventDefault()
-
 		containerRef.current.scrollLeft += e.deltaY
 	}
 
@@ -201,7 +208,7 @@ const WeatherIn = () => {
 		<>
 			<FadeOut />
 
-			<div className='transitionElement w-screen h-screen absolute top-0 left-0 z-100 opacity-0 invisible'></div>
+			<div className='transitionElement bg-black/20 pointer-events-none w-screen h-screen absolute top-0 left-0 z-100 opacity-0 invisible'></div>
 
 			<div className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'>
 				<div
