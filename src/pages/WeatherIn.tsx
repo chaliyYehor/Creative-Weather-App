@@ -74,6 +74,8 @@ const WeatherIn = () => {
 
 	const tl = useRef<gsap.core.Timeline>(null)
 
+	const hourLength = data?.forecast?.forecastday?.[0]?.hour?.length ?? 0
+
 	useGSAP(() => {
 		tl.current = gsap.timeline()
 		if (navigatedFrom === 'homePage') {
@@ -161,14 +163,19 @@ const WeatherIn = () => {
 				},
 				'<',
 			)
-			.from('.todaysForecast div', {
+	}, [navigatedFrom, cityLatLon])
+
+	useGSAP(() => {
+		if (hourLength > 0) {
+			tl.current!.from('.animate', {
 				x: 30,
 				opacity: 0,
 				ease: 'power1.inOut',
 				duration: 0.5,
 				stagger: 0.1,
-			})
-	}, [navigatedFrom, cityLatLon])
+			}, '<0.5')
+		}
+	}, [hourLength])
 
 	async function submit() {
 		;(document.activeElement as HTMLElement)?.blur()
@@ -384,7 +391,7 @@ const WeatherIn = () => {
 
 								return (
 									<div
-										className='w-20 shrink-0 flex flex-col justify-center items-center gap-2'
+										className='animate w-20 shrink-0 flex flex-col justify-center items-center gap-2'
 										key={idx}
 									>
 										<p className='font-bold text-xl'>{time}</p>
