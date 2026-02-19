@@ -26,6 +26,20 @@ import { useLocalStorage } from '@uidotdev/usehooks'
 import { changeLang } from '#store/slices/languageSlice'
 
 const WeatherIn = () => {
+	const dispatch = useDispatch<AppDispatch>()
+	const lang = useSelector((state: RootType) => state.langSlice.lang)
+
+	const pageId = useParams()
+	const pageData = pageId.city?.split('&')
+	const languageUsed = pageData?.[3] ?? lang
+	const cityName = pageData?.[0]
+	const cityLatLon = pageData?.[1]
+	const navigatedFrom = pageData?.[2]
+
+	useEffect(() => {
+		dispatch(changeLang(languageUsed as 'uk' | 'en'))
+	}, [languageUsed])
+
 	const [_, setPlaces] = useLocalStorage<string[]>('places', [])
 
 	const { reset } = useFormContext<Search>()
@@ -39,19 +53,6 @@ const WeatherIn = () => {
 		throw new Error('SearchContext is not provided')
 	}
 	const { isOptionSelected, latLon } = ctx
-
-	const dispatch = useDispatch<AppDispatch>()
-	const lang = useSelector((state: RootType) => state.langSlice.lang)
-
-	const pageId = useParams()
-
-	const pageData = pageId.city?.split('&')
-	const cityName = pageData?.[0]
-	const cityLatLon = pageData?.[1]
-	const navigatedFrom = pageData?.[2]
-	const languageUsed = pageData?.[3] ?? lang
-
-	dispatch(changeLang(languageUsed as 'uk' | 'en'))
 
 	console.log(lang)
 

@@ -43,7 +43,7 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 	return (
 		<div
 			onClick={() => getMoreInfo()}
-			className='cardWrapper border-2 border-white/30 w-full h-15 md:h-20 rounded-sm text-xl md:text-3xl hover:border-white/50 transition grid gap-2 grid-cols-[60%_1fr_1fr] cursor-pointer'
+			className='cardWrapper border-2 border-white/30 w-full h-15 md:h-20 rounded-sm text-xl md:text-3xl hover:border-white/50 transition grid gap-2 grid-cols-[60%_1fr_1fr] cursor-pointer overflow-hidden'
 		>
 			<div className='city flex items-center gap-5 pl-5 w-full h-full'>
 				<h3>{place.includes('&') ? place.split('&')[0] : place}</h3>
