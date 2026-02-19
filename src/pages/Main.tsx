@@ -104,6 +104,11 @@ export default function Main() {
 					},
 					'<',
 				)
+				.from('.recentlyViewedWrapper', {
+					opacity: 0,
+					duration: 1.5,
+					ease: 'power1.out',
+				}, '<')
 		} else {
 			tl.from(loaderRef.current!.children[0], {
 				autoAlpha: 1,
