@@ -1,7 +1,6 @@
 import type { GeoapifyAutocompleteResponse } from '#schemas/autocompleteSchema'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const API_KEY = import.meta.env.VITE_AUTOCOMPLETE_API_KEY
 
 export const autocompleteApi = createApi({
 	reducerPath: 'autocompleteApi',

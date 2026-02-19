@@ -1,8 +1,6 @@
 import type { ForecastResponse } from '#schemas/weatherType'
 import { queryOptions } from '@tanstack/react-query'
 
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY
-
 export default function autocompleteQueryOptions(
 	search: string,
 	lang: 'uk' | 'en',
