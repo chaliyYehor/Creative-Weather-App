@@ -104,23 +104,56 @@ const WeatherIn = () => {
 					},
 					'<0.5',
 				)
-				.from('.searchWrapper', {
-					opacity: 0,
-					y: -30,
-					duration: 0.7,
-					ease: 'power1.inOut',
-				}, '<0.5').from('.mainInfoWrapper div', {
+				.from(
+					'.searchWrapper',
+					{
+						opacity: 0,
+						y: -30,
+						duration: 0.7,
+						ease: 'power1.inOut',
+					},
+					'<0.5',
+				)
+				.from(
+					'.mainInfoWrapper div',
+					{
+						x: 30,
+						opacity: 0,
+						duration: 0.8,
+						ease: 'power1.inOut',
+						stagger: 0.2,
+					},
+					'<0.5',
+				)
+				.from(
+					'.content h4, .content h3',
+					{
+						opacity: 0,
+						duration: 0.5,
+						ease: 'power1.out',
+						stagger: 0.2,
+					},
+					'<0.5',
+				)
+				.from('.current', { opacity: 0 }, '<')
+				.from(
+					'.current div',
+					{
+						y: -30,
+						opacity: 0,
+						duration: 0.7,
+						ease: 'power1.inOut',
+						stagger: 0.05,
+						borderColor: 'transparent',
+					},
+					'<',
+				).from('.todaysForecast div', {
 					x: 30,
 					opacity: 0,
-					duration: 0.8,
 					ease: 'power1.inOut',
-					stagger: 0.2
-				}, '<0.5').from('.content h4, .content h3', {
-					opacity: 0,
 					duration: 0.5,
-					ease: 'power1.out',
-					stagger: 0.2
-				}, '<0.5')
+					stagger: 0.1
+				})
 		}
 	}, [isFetched])
 
