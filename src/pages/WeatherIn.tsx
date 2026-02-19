@@ -73,7 +73,9 @@ const WeatherIn = () => {
 
 	useGSAP(() => {
 		if (isFetched && navigatedFrom === 'homePage') {
-			gsap.fromTo(
+			const tl = gsap.timeline()
+
+			tl.fromTo(
 				'.slicesWrapper div',
 				{ xPercent: 0, x: 0, pointerEvents: 'all' },
 				{
@@ -86,6 +88,21 @@ const WeatherIn = () => {
 					ease: 'power1.inOut',
 				},
 			)
+				.from(
+					'.backgroundImage',
+					{
+						opacity: 0,
+						duration: 1,
+						ease: 'power1.inOut',
+					},
+					'<0.5',
+				)
+				.from('.logo', {
+					opacity: 0,
+					y: -30,
+					duration: 1,
+					ease: 'power1.inOut',
+				}, '<0.5')
 		}
 	}, [isFetched])
 
@@ -120,13 +137,15 @@ const WeatherIn = () => {
 		<>
 			<FadeOut />
 
-			<div
-				style={{
-					backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
+			<div className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'>
+				<div
+					style={{
+						backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
     url(${url})`,
-				}}
-				className='weatherContainer w-full h-screen overflow-hidden flex justify-center items-start relative'
-			>
+					}}
+					className='backgroundImage w-full h-full -z-1 overflow-hidden'
+				></div>
+
 				<div className='searchWrapper lg:hidden flex absolute right-5 top-4 z-10'>
 					<SearchInput
 						setNeededValue={setSearchValue}
