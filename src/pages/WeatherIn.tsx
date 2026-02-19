@@ -167,13 +167,17 @@ const WeatherIn = () => {
 
 	useGSAP(() => {
 		if (hourLength > 0) {
-			tl.current!.from('.animate', {
-				x: 30,
-				opacity: 0,
-				ease: 'power1.inOut',
-				duration: 0.5,
-				stagger: 0.1,
-			}, '<0.5')
+			tl.current!.from(
+				'.animate',
+				{
+					x: 30,
+					opacity: 0,
+					ease: 'power1.inOut',
+					duration: 0.5,
+					stagger: 0.1,
+				},
+				'<0.5',
+			)
 		}
 	}, [hourLength])
 
@@ -379,15 +383,12 @@ const WeatherIn = () => {
 							className='todaysForecast w-full flex overflow-auto mb-10'
 						>
 							{data?.forecast.forecastday[0].hour.map((hourData, idx) => {
-								let time = ''
-								if (idx <= 9) {
-									time = `0${idx}`
-								}
-								if (localTime && idx === +localTime) {
-									time = languageUsed === 'en' ? 'Now' : 'Зараз'
-								} else {
-									time = idx.toString()
-								}
+								const isNow = localTime && idx === Number(localTime)
+								const time = isNow
+									? languageUsed === 'en'
+										? 'Now'
+										: 'Зараз'
+									: String(idx).padStart(2, '0')
 
 								return (
 									<div

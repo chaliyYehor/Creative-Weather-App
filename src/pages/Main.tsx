@@ -1,4 +1,4 @@
-// import Snowfall from 'react-snowfall'
+import Snowfall from 'react-snowfall'
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
 import Search from '#components/Search'
@@ -182,7 +182,7 @@ export default function Main() {
 			<FadeOut />
 			<section className='mainSection w-full h-screen overflow-hidden bg-[#01122e]'>
 				<div className='backgroundEffect w-full h-full fixed pointer-events-none'>
-					{/* <Snowfall snowflakeCount={60} /> */}
+					<Snowfall snowflakeCount={60} />
 				</div>
 
 				<header className='relative w-full min-h-30 flex justify-center items-center flex-col md:flex-row md:items-start md:justify-end mt-5 md:mt-10'>
