@@ -75,7 +75,7 @@ const WeatherIn = () => {
 		if (isFetched && navigatedFrom === 'homePage') {
 			const tl = gsap.timeline()
 
-			tl.fromTo(
+			gsap.fromTo(
 				'.slicesWrapper div',
 				{ xPercent: 0, x: 0, pointerEvents: 'all' },
 				{
@@ -88,20 +88,38 @@ const WeatherIn = () => {
 					ease: 'power1.inOut',
 				},
 			)
+			tl.from('.backgroundImage', {
+				opacity: 0,
+				duration: 0.7,
+				delay: 1.75,
+				ease: 'power1.inOut',
+			})
 				.from(
-					'.backgroundImage',
+					'.logo',
 					{
 						opacity: 0,
+						y: -30,
 						duration: 1,
 						ease: 'power1.inOut',
 					},
 					'<0.5',
 				)
-				.from('.logo', {
+				.from('.searchWrapper', {
 					opacity: 0,
 					y: -30,
-					duration: 1,
+					duration: 0.7,
 					ease: 'power1.inOut',
+				}, '<0.5').from('.mainInfoWrapper div', {
+					x: 30,
+					opacity: 0,
+					duration: 0.8,
+					ease: 'power1.inOut',
+					stagger: 0.2
+				}, '<0.5').from('.content h4, .content h3', {
+					opacity: 0,
+					duration: 0.5,
+					ease: 'power1.out',
+					stagger: 0.2
 				}, '<0.5')
 		}
 	}, [isFetched])
