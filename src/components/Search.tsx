@@ -77,7 +77,7 @@ export default function Search() {
 		<>
 			<form
 				className={
-					'flex flex-col sm:flex-row justify-center items-center gap-5'
+					'searchForm flex flex-col sm:flex-row justify-center items-center gap-5'
 				}
 				onSubmit={handleSubmit(onSubmit)}
 			>
