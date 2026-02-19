@@ -50,7 +50,7 @@ const RecentlyViewedCard = ({ place }: RecentlyViewedCardProps) => {
 			</div>
 
 			<div className='icon w-full h-full flex justify-start items-center'>
-				<img className='w-full h-full' src={data?.current.condition.icon} alt='weathter type' />
+				<img className='w-full' src={data?.current.condition.icon} alt='weathter type' />
 			</div>
 
 			<div className='temp w-full h-full  pr-5 flex items-center justify-center text-2xl md:text-3xl'>
