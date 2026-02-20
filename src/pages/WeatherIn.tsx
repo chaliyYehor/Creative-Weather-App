@@ -374,7 +374,7 @@ const WeatherIn = () => {
 						<section
 							ref={containerRef}
 							onWheel={handleWheel}
-							className='todaysForecast w-full flex overflow-auto mb-10'
+							className='todaysForecast w-full flex overflow-auto mb-40 md:10'
 						>
 							{data?.forecast.forecastday[0].hour.map((hourData, idx) => {
 								const isNow = localTime && idx === Number(localTime)
